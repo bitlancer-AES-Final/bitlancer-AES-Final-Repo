@@ -31,13 +31,13 @@ namespace bitlancer
             address_richtextbox.Text = MyUser.address;
             email_textbox.Text = MyUser.userMail;
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void btnDuzenle_Click(object sender, EventArgs e)
         {
-            if (button1.Text == "Düzenle")
+            if (btnDuzenle.Text == "Düzenle")
             {
-                button1.Text = "Kaydet";
-                button1.BackColor = Color.Green;
-                button1.ForeColor = Color.White;
+                btnDuzenle.Text = "Kaydet";
+                btnDuzenle.BackColor = Color.Green;
+                btnDuzenle.ForeColor = Color.White;
                 fullname_textbox.Enabled = true;
                 username_textbox.Enabled = true;
                 userpassword_textbox.Enabled = true;
@@ -68,9 +68,9 @@ namespace bitlancer
                     {
                         setUI();
                     }
-                    button1.Text = "Düzenle";
-                    button1.ForeColor = Color.Black;
-                    button1.BackColor = Color.FromArgb(128, 128, 255);
+                    btnDuzenle.Text = "Düzenle";
+                    btnDuzenle.ForeColor = Color.Black;
+                    btnDuzenle.BackColor = Color.FromArgb(128, 128, 255);
                     fullname_textbox.Enabled = false;
                     username_textbox.Enabled = false;
                     mskTel.Enabled = false;

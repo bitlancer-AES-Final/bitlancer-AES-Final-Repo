@@ -28,96 +28,104 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.grpBoxParaYukleme = new System.Windows.Forms.GroupBox();
+            this.btnYukle = new System.Windows.Forms.Button();
+            this.lblMiktar = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbmParaBirimi = new System.Windows.Forms.ComboBox();
+            this.grpBoxParaYukleme.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // grpBoxParaYukleme
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(776, 83);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Bakiye Yükleme";
+            this.grpBoxParaYukleme.Controls.Add(this.btnYukle);
+            this.grpBoxParaYukleme.Controls.Add(this.lblMiktar);
+            this.grpBoxParaYukleme.Controls.Add(this.numericUpDown1);
+            this.grpBoxParaYukleme.Controls.Add(this.label1);
+            this.grpBoxParaYukleme.Controls.Add(this.cbmParaBirimi);
+            this.grpBoxParaYukleme.Location = new System.Drawing.Point(16, 15);
+            this.grpBoxParaYukleme.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBoxParaYukleme.Name = "grpBoxParaYukleme";
+            this.grpBoxParaYukleme.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBoxParaYukleme.Size = new System.Drawing.Size(1035, 102);
+            this.grpBoxParaYukleme.TabIndex = 2;
+            this.grpBoxParaYukleme.TabStop = false;
+            this.grpBoxParaYukleme.Text = "Bakiye Yükleme";
             // 
-            // label1
+            // btnYukle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Para Birimi:";
+            this.btnYukle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnYukle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnYukle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.btnYukle.Location = new System.Drawing.Point(676, 47);
+            this.btnYukle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnYukle.Name = "btnYukle";
+            this.btnYukle.Size = new System.Drawing.Size(303, 33);
+            this.btnYukle.TabIndex = 6;
+            this.btnYukle.Text = "YÜKLE";
+            this.btnYukle.UseVisualStyleBackColor = false;
+            this.btnYukle.Click += new System.EventHandler(this.button1_Click);
             // 
-            // comboBox1
+            // lblMiktar
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 37);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(338, 28);
-            this.comboBox1.TabIndex = 2;
+            this.lblMiktar.AutoSize = true;
+            this.lblMiktar.Location = new System.Drawing.Point(463, 27);
+            this.lblMiktar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMiktar.Name = "lblMiktar";
+            this.lblMiktar.Size = new System.Drawing.Size(50, 17);
+            this.lblMiktar.TabIndex = 5;
+            this.lblMiktar.Text = "Miktar:";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Bold);
-            this.numericUpDown1.Location = new System.Drawing.Point(350, 38);
+            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.numericUpDown1.Location = new System.Drawing.Point(467, 47);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(151, 28);
+            this.numericUpDown1.Size = new System.Drawing.Size(201, 29);
             this.numericUpDown1.TabIndex = 4;
             this.numericUpDown1.ThousandsSeparator = true;
             // 
-            // label2
+            // label1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(347, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Miktar:";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 26);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Para Birimi:";
             // 
-            // button1
+            // cbmParaBirimi
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial Unicode MS", 10F, System.Drawing.FontStyle.Bold);
-            this.button1.Location = new System.Drawing.Point(507, 38);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(227, 27);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "YÜKLE";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.cbmParaBirimi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbmParaBirimi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.cbmParaBirimi.FormattingEnabled = true;
+            this.cbmParaBirimi.Location = new System.Drawing.Point(8, 46);
+            this.cbmParaBirimi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbmParaBirimi.Name = "cbmParaBirimi";
+            this.cbmParaBirimi.Size = new System.Drawing.Size(449, 32);
+            this.cbmParaBirimi.TabIndex = 2;
             // 
             // Transfer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 109);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1067, 134);
+            this.Controls.Add(this.grpBoxParaYukleme);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Transfer";
-            this.Text = "Transfer";
             this.Load += new System.EventHandler(this.Transfer_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grpBoxParaYukleme.ResumeLayout(false);
+            this.grpBoxParaYukleme.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
@@ -125,11 +133,11 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox grpBoxParaYukleme;
+        private System.Windows.Forms.Button btnYukle;
+        private System.Windows.Forms.Label lblMiktar;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbmParaBirimi;
     }
 }

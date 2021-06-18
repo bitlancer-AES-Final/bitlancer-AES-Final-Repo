@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace bitlancer
 {
-    public partial class loginForm : Form
+    public partial class FrmGiris : Form
     {
-        public loginForm()
+        public FrmGiris()
         {
             InitializeComponent();
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void btnGirisYap_Click(object sender, EventArgs e)
         {
             if (username_textbox.Text!="" && userpassword_textbox.Text!="")
             {
@@ -39,10 +39,15 @@ namespace bitlancer
         }
 
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabelKayitOl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmKullaniciKayit fr = new FrmKullaniciKayit();
             fr.ShowDialog();
+        }
+
+        private void FrmGiris_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

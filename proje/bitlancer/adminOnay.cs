@@ -38,11 +38,20 @@ namespace bitlancer
             int quantity = Convert.ToInt32(adminOnayDataGrid.CurrentRow.Cells[5].Value);
             int state = cbAdminOnay.Checked ? 1 : 0;
             string description = txtAdminOnay.Text;
+
+            
+
+
+
+
             int itemQuantity = SingletonDB.GetInstance.getId("select quantity from item_user_infos where  selling=0 and (item_id=" + item_id + " and user_id=" + user_id + ")");
 
             SingletonDB.GetInstance.uptadeAdminOnayDataGrid(_id, state,description);
             SingletonDB.GetInstance.updateAfterOrder(0, user_id, item_id,(itemQuantity + quantity));
             veriReset();
+
+
+
         }
     }
 }

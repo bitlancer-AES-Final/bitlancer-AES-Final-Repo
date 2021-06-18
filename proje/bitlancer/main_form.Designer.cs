@@ -95,13 +95,15 @@
             this.mainItemsDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.mainItemsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.mainItemsDataGrid.GridColor = System.Drawing.Color.Plum;
-            this.mainItemsDataGrid.Location = new System.Drawing.Point(12, 35);
+            this.mainItemsDataGrid.Location = new System.Drawing.Point(15, 44);
+            this.mainItemsDataGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mainItemsDataGrid.MultiSelect = false;
             this.mainItemsDataGrid.Name = "mainItemsDataGrid";
             this.mainItemsDataGrid.ReadOnly = true;
+            this.mainItemsDataGrid.RowHeadersWidth = 51;
             this.mainItemsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.mainItemsDataGrid.ShowEditingIcon = false;
-            this.mainItemsDataGrid.Size = new System.Drawing.Size(921, 383);
+            this.mainItemsDataGrid.Size = new System.Drawing.Size(1151, 479);
             this.mainItemsDataGrid.TabIndex = 0;
             this.mainItemsDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.mainItemsDataGrid_CellContentClick);
             // 
@@ -114,6 +116,7 @@
             this.butButton.FillWeight = 98.47717F;
             this.butButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butButton.HeaderText = "AL";
+            this.butButton.MinimumWidth = 6;
             this.butButton.Name = "butButton";
             this.butButton.ReadOnly = true;
             this.butButton.Text = "AL";
@@ -128,6 +131,7 @@
             this.sellButton.FillWeight = 101.5229F;
             this.sellButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sellButton.HeaderText = "SAT";
+            this.sellButton.MinimumWidth = 6;
             this.sellButton.Name = "sellButton";
             this.sellButton.ReadOnly = true;
             this.sellButton.Text = "SAT";
@@ -149,10 +153,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 424);
+            this.tabControl1.Location = new System.Drawing.Point(15, 530);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(925, 317);
+            this.tabControl1.Size = new System.Drawing.Size(1156, 396);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -167,10 +172,11 @@
             this.tabPage1.Controls.Add(this.urunlerDatagrid);
             this.tabPage1.Controls.Add(this.bakiyeLabel);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(917, 291);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Size = new System.Drawing.Size(1148, 367);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Hesap Özeti:";
             // 
@@ -179,9 +185,10 @@
             this.adminButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.adminButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adminButton.ForeColor = System.Drawing.Color.Blue;
-            this.adminButton.Location = new System.Drawing.Point(279, 6);
+            this.adminButton.Location = new System.Drawing.Point(349, 8);
+            this.adminButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.adminButton.Name = "adminButton";
-            this.adminButton.Size = new System.Drawing.Size(83, 83);
+            this.adminButton.Size = new System.Drawing.Size(104, 104);
             this.adminButton.TabIndex = 12;
             this.adminButton.Text = "Admin Panel";
             this.adminButton.UseVisualStyleBackColor = true;
@@ -194,9 +201,10 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Bahnschrift Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label2.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label2.Location = new System.Drawing.Point(9, 50);
+            this.label2.Location = new System.Drawing.Point(11, 62);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(259, 16);
+            this.label2.Size = new System.Drawing.Size(343, 21);
             this.label2.TabIndex = 11;
             this.label2.Text = "(Yapılan Alıma ve Belirlediğiniz Satışa Göre)";
             // 
@@ -205,9 +213,10 @@
             this.addItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addItemButton.ForeColor = System.Drawing.Color.ForestGreen;
-            this.addItemButton.Location = new System.Drawing.Point(368, 6);
+            this.addItemButton.Location = new System.Drawing.Point(460, 8);
+            this.addItemButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.addItemButton.Name = "addItemButton";
-            this.addItemButton.Size = new System.Drawing.Size(83, 83);
+            this.addItemButton.Size = new System.Drawing.Size(104, 104);
             this.addItemButton.TabIndex = 10;
             this.addItemButton.Text = "Bakiye Yükle";
             this.addItemButton.UseVisualStyleBackColor = true;
@@ -218,9 +227,10 @@
             this.userInfoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userInfoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoButton.ForeColor = System.Drawing.Color.OrangeRed;
-            this.userInfoButton.Location = new System.Drawing.Point(457, 6);
+            this.userInfoButton.Location = new System.Drawing.Point(571, 8);
+            this.userInfoButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.userInfoButton.Name = "userInfoButton";
-            this.userInfoButton.Size = new System.Drawing.Size(83, 83);
+            this.userInfoButton.Size = new System.Drawing.Size(104, 104);
             this.userInfoButton.TabIndex = 9;
             this.userInfoButton.Text = "Hesap Bilgileri";
             this.userInfoButton.UseVisualStyleBackColor = true;
@@ -234,7 +244,8 @@
             this.graphic.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.graphic.Legends.Add(legend1);
-            this.graphic.Location = new System.Drawing.Point(546, 6);
+            this.graphic.Location = new System.Drawing.Point(682, 8);
+            this.graphic.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.graphic.Name = "graphic";
             this.graphic.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
             series1.ChartArea = "ChartArea1";
@@ -243,7 +254,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Para";
             this.graphic.Series.Add(series1);
-            this.graphic.Size = new System.Drawing.Size(365, 279);
+            this.graphic.Size = new System.Drawing.Size(456, 349);
             this.graphic.TabIndex = 8;
             this.graphic.Text = "chart1";
             title1.Name = "miktar";
@@ -255,9 +266,10 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label3.ForeColor = System.Drawing.Color.Teal;
-            this.label3.Location = new System.Drawing.Point(8, 71);
+            this.label3.Location = new System.Drawing.Point(10, 89);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 18);
+            this.label3.Size = new System.Drawing.Size(159, 22);
             this.label3.TabIndex = 7;
             this.label3.Text = "Mevcut Ürünler:";
             // 
@@ -282,13 +294,15 @@
             this.urunlerDatagrid.DefaultCellStyle = dataGridViewCellStyle5;
             this.urunlerDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.urunlerDatagrid.GridColor = System.Drawing.Color.Plum;
-            this.urunlerDatagrid.Location = new System.Drawing.Point(6, 92);
+            this.urunlerDatagrid.Location = new System.Drawing.Point(8, 115);
+            this.urunlerDatagrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.urunlerDatagrid.MultiSelect = false;
             this.urunlerDatagrid.Name = "urunlerDatagrid";
             this.urunlerDatagrid.ReadOnly = true;
+            this.urunlerDatagrid.RowHeadersWidth = 51;
             this.urunlerDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.urunlerDatagrid.ShowEditingIcon = false;
-            this.urunlerDatagrid.Size = new System.Drawing.Size(534, 193);
+            this.urunlerDatagrid.Size = new System.Drawing.Size(668, 241);
             this.urunlerDatagrid.TabIndex = 6;
             this.urunlerDatagrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.urunlerDatagrid_CellContentClick);
             // 
@@ -300,6 +314,7 @@
             this.Column1.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Column1.HeaderText = "SAT";
+            this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             this.Column1.Text = "SAT";
@@ -311,9 +326,10 @@
             this.bakiyeLabel.BackColor = System.Drawing.Color.Transparent;
             this.bakiyeLabel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold);
             this.bakiyeLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.bakiyeLabel.Location = new System.Drawing.Point(6, 21);
+            this.bakiyeLabel.Location = new System.Drawing.Point(8, 26);
+            this.bakiyeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.bakiyeLabel.Name = "bakiyeLabel";
-            this.bakiyeLabel.Size = new System.Drawing.Size(50, 29);
+            this.bakiyeLabel.Size = new System.Drawing.Size(61, 35);
             this.bakiyeLabel.TabIndex = 5;
             this.bakiyeLabel.Text = "-- ₺";
             // 
@@ -323,19 +339,21 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label1.Location = new System.Drawing.Point(6, 3);
+            this.label1.Location = new System.Drawing.Point(8, 4);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 18);
+            this.label1.Size = new System.Drawing.Size(228, 22);
             this.label1.TabIndex = 4;
             this.label1.Text = "Toplam Cüzdan Değeri:";
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.transferlerDatgrid);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(917, 291);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Size = new System.Drawing.Size(1148, 367);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Transferler:";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -348,6 +366,7 @@
             this.transferlerDatgrid.AllowUserToOrderColumns = true;
             this.transferlerDatgrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.transferlerDatgrid.BackgroundColor = System.Drawing.Color.White;
+            this.transferlerDatgrid.ColumnHeadersHeight = 29;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -359,22 +378,25 @@
             this.transferlerDatgrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.transferlerDatgrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.transferlerDatgrid.GridColor = System.Drawing.Color.Plum;
-            this.transferlerDatgrid.Location = new System.Drawing.Point(3, 3);
+            this.transferlerDatgrid.Location = new System.Drawing.Point(4, 4);
+            this.transferlerDatgrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.transferlerDatgrid.MultiSelect = false;
             this.transferlerDatgrid.Name = "transferlerDatgrid";
             this.transferlerDatgrid.ReadOnly = true;
+            this.transferlerDatgrid.RowHeadersWidth = 51;
             this.transferlerDatgrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.transferlerDatgrid.ShowEditingIcon = false;
-            this.transferlerDatgrid.Size = new System.Drawing.Size(911, 285);
+            this.transferlerDatgrid.Size = new System.Drawing.Size(1140, 359);
             this.transferlerDatgrid.TabIndex = 1;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.lastOrdersDatagrid);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(917, 291);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Size = new System.Drawing.Size(1148, 367);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Son Emirler:";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -399,13 +421,15 @@
             this.lastOrdersDatagrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lastOrdersDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.lastOrdersDatagrid.GridColor = System.Drawing.Color.Plum;
-            this.lastOrdersDatagrid.Location = new System.Drawing.Point(3, 3);
+            this.lastOrdersDatagrid.Location = new System.Drawing.Point(4, 4);
+            this.lastOrdersDatagrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lastOrdersDatagrid.MultiSelect = false;
             this.lastOrdersDatagrid.Name = "lastOrdersDatagrid";
             this.lastOrdersDatagrid.ReadOnly = true;
+            this.lastOrdersDatagrid.RowHeadersWidth = 51;
             this.lastOrdersDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.lastOrdersDatagrid.ShowEditingIcon = false;
-            this.lastOrdersDatagrid.Size = new System.Drawing.Size(911, 285);
+            this.lastOrdersDatagrid.Size = new System.Drawing.Size(1140, 359);
             this.lastOrdersDatagrid.TabIndex = 2;
             // 
             // kullancıAdLabel
@@ -414,9 +438,10 @@
             this.kullancıAdLabel.BackColor = System.Drawing.Color.Transparent;
             this.kullancıAdLabel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold);
             this.kullancıAdLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.kullancıAdLabel.Location = new System.Drawing.Point(12, 3);
+            this.kullancıAdLabel.Location = new System.Drawing.Point(15, 4);
+            this.kullancıAdLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.kullancıAdLabel.Name = "kullancıAdLabel";
-            this.kullancıAdLabel.Size = new System.Drawing.Size(186, 29);
+            this.kullancıAdLabel.Size = new System.Drawing.Size(233, 35);
             this.kullancıAdLabel.TabIndex = 8;
             this.kullancıAdLabel.Text = "Name Surname";
             // 
@@ -426,28 +451,29 @@
             this.kullaniciTipiLabel.BackColor = System.Drawing.Color.Transparent;
             this.kullaniciTipiLabel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.kullaniciTipiLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.kullaniciTipiLabel.Location = new System.Drawing.Point(606, 13);
+            this.kullaniciTipiLabel.Location = new System.Drawing.Point(758, 16);
+            this.kullaniciTipiLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.kullaniciTipiLabel.Name = "kullaniciTipiLabel";
             this.kullaniciTipiLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.kullaniciTipiLabel.Size = new System.Drawing.Size(327, 16);
+            this.kullaniciTipiLabel.Size = new System.Drawing.Size(409, 20);
             this.kullaniciTipiLabel.TabIndex = 9;
             this.kullaniciTipiLabel.Text = "----- User";
             this.kullaniciTipiLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // main_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(946, 753);
+            this.ClientSize = new System.Drawing.Size(1182, 941);
             this.Controls.Add(this.kullaniciTipiLabel);
             this.Controls.Add(this.kullancıAdLabel);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.mainItemsDataGrid);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "main_form";
-            this.Text = "İşlem Ekranı";
             this.Load += new System.EventHandler(this.main_form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainItemsDataGrid)).EndInit();
             this.tabControl1.ResumeLayout(false);
