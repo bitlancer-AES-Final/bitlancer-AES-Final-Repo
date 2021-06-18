@@ -30,7 +30,7 @@ namespace bitlancer
 			MySqlConnection connection = null;
 			try
 			{
-				connection = new MySqlConnection("server=localhost;port=3307;user=root;pwd=;database=bitlancer;charset=utf8;pooling=false");
+				connection = new MySqlConnection("server=localhost;user id=root;database=bitlancer-aes-final");
 			}
 			catch (Exception e)
 			{
