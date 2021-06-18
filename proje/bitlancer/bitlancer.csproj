@@ -58,11 +58,11 @@
     <Compile Include="chartItemValue.cs" />
     <Compile Include="orderUpdateItem.cs" />
     <Compile Include="data.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FrmGiris.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FrmGiris.Designer.cs">
+      <DependentUpon>FrmGiris.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmKullaniciKayit.cs">
       <SubType>Form</SubType>
@@ -106,8 +106,8 @@
     <EmbeddedResource Include="adminOnay.resx">
       <DependentUpon>adminOnay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FrmGiris.resx">
+      <DependentUpon>FrmGiris.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmKullaniciKayit.resx">
       <DependentUpon>FrmKullaniciKayit.cs</DependentUpon>

@@ -76,7 +76,7 @@ namespace bitlancer
         }
         public void setUI()
         {
-            label1.Text = myItem.itemName;
+            lblUrunAd.Text = myItem.itemName;
             quantity.Text = "Maksimum Miktar: " + myItem.quantity;
             itemPriceLabel.Text = myItem.unitPrice + " ₺ : ";
             transferlerDatgrid.DataSource = lastOrdersData;
@@ -161,9 +161,9 @@ namespace bitlancer
                 orderProcces.RunWorkerAsync();
                 quantityTextBox.Enabled = false;
                 buyButton.Enabled = false;
-                pictureBox1.Enabled = false;
-                pictureBox2.Visible = true;
-                pictureBox2.Enabled = true;
+                picBoxDegisiklik.Enabled = false;
+                picBoxYuklenme.Visible = true;
+                picBoxYuklenme.Enabled = true;
                 label3.Visible = true;
             }
             else
@@ -183,9 +183,9 @@ namespace bitlancer
 
             quantityTextBox.Enabled = true;
             buyButton.Enabled = true;
-            pictureBox1.Enabled = true;
-            pictureBox2.Visible = false;
-            pictureBox2.Enabled = false;
+            picBoxDegisiklik.Enabled = true;
+            picBoxYuklenme.Visible = false;
+            picBoxYuklenme.Enabled = false;
             label3.Visible = false;
         }
 
