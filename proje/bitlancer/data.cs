@@ -1,14 +1,11 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace bitlancer
 {
-	public sealed class SingletonDB
+    public sealed class SingletonDB
 	{
 		private static SingletonDB instance = null;
 
@@ -38,16 +35,50 @@ namespace bitlancer
 			}
 			return connection;
 		}
+
+		public MySqlDataAdapter getAdapter(string sql)
+		{
+
+			MySqlDataAdapter adtr = null;
+			MySqlConnection connection = null;
+			connection = getConnection();
+			connection.Open();
+			try
+			{
+				adtr = new MySqlDataAdapter(sql, connection);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+			return adtr;
+		}
+
+		public MySqlCommand getCommand(string sql)
+		{
+
+			MySqlCommand command = null;
+			MySqlConnection connection = null;
+			connection = getConnection();
+			connection.Open();
+			try
+			{
+				command = SingletonDB.GetInstance.getCommand(sql);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+			return command;
+		}
+
 		public int getId(string sql)
 		{
 			int id = 0;
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand(sql, connection);
+				command = SingletonDB.GetInstance.getCommand(sql);
 				id = Convert.ToInt32(command.ExecuteScalar());
 				command.ExecuteNonQuery();
 			}
@@ -55,33 +86,16 @@ namespace bitlancer
 			{
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+			
 			return id;
 		}
 		public double getDouble(string sql)
 		{
 			double val = 0;
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand(sql, connection);
+				command = SingletonDB.GetInstance.getCommand(sql);
 				MySqlDataReader reader = command.ExecuteReader();
 				while (reader.Read())
 				{
@@ -92,67 +106,32 @@ namespace bitlancer
 			{
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+			
 			return val;
 		}
 		public int updateitem(int id)
 		{
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
 				Random rnd = new Random();
-				command = new MySqlCommand("update item_user_infos set unit_price=" + id + " where id=6", connection);
+				command = SingletonDB.GetInstance.getCommand("update item_user_infos set unit_price=" + id + " where id=6");
 				command.ExecuteNonQuery();
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+			
 			return id;
 		}
 		public int loginCheck(string userName, string password)
 		{
 			bool state = false;
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("select user_name, user_password from users", connection);
-				command.Connection = connection;
+				command = SingletonDB.GetInstance.getCommand("select user_name, user_password from users");
 				MySqlDataReader read = command.ExecuteReader();
 				while (read.Read())
 				{
@@ -168,34 +147,17 @@ namespace bitlancer
 			{
 				Console.WriteLine("hata: " + e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+			
 			return state ? getId("select id from users where user_name='" + userName + "'") : 0;
 
 		}
 		public item getItem(int id)
 		{
 			item myItem = new item();
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("select * from items where id=" + id, connection);
+				command = SingletonDB.GetInstance.getCommand("select * from items where id=" + id);
 				MySqlDataReader reader = command.ExecuteReader();
 				while (reader.Read())
 				{
@@ -207,34 +169,17 @@ namespace bitlancer
 			{
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+			
 			return myItem;
 		}
 		public List<item> getItemBitlancer()
 		{
 			List<item> items=new List<item>();
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
+
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("select * from items", connection);
-				command.Connection = connection;
+				command = SingletonDB.GetInstance.getCommand("select * from items");
 				MySqlDataReader read = command.ExecuteReader();
 				while (read.Read())
 				{
@@ -248,67 +193,32 @@ namespace bitlancer
 			{
 				Console.WriteLine("hata: " + e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+			
 			return items;
 		}
 		public DataTable getItems()
 		{
+			MySqlCommand command = new MySqlCommand();
 			DataTable dt = new DataTable();
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("select (row_number() over (order by i.item_name))as 'No:', i.item_name as 'Para Birimi:',concat(min(f.unit_price),' ₺') as 'Biriim Fiyat:',i.id from items i, item_user_infos f where  i.id=f.item_id and i.id!=4 and f.selling=1 GROUP by f.item_id order by i.item_name", connection);
+				command = SingletonDB.GetInstance.getCommand("select (row_number() over (order by i.item_name))as 'No:', i.item_name as 'Para Birimi:',concat(min(f.unit_price),' ₺') as 'Biriim Fiyat:',i.id from items i, item_user_infos f where  i.id=f.item_id and i.id!=4 and f.selling=1 GROUP by f.item_id order by i.item_name");
 				dt.Load(command.ExecuteReader());
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+			
 			return dt;
 		}
 		public item getItemOrder(int id, int userID)
 		{
 			item urun = new item();
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("select item_id, min(unit_price), sum(quantity),(select item_name from items where id=s.item_id) from item_user_infos s where selling=1 and item_id=" + id, connection);
-				command.Connection = connection;
+				command = SingletonDB.GetInstance.getCommand("select item_id, min(unit_price), sum(quantity),(select item_name from items where id=s.item_id) from item_user_infos s where selling=1 and item_id=" + id);
 				MySqlDataReader read = command.ExecuteReader();
 				while (read.Read())
 				{
@@ -322,67 +232,33 @@ namespace bitlancer
 			{
 				Console.WriteLine("hata: " + e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+			
 			return urun;
 		}
 		public DataTable getItemTransfers(int id)
 		{
 			DataTable dt = new DataTable();
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("select (row_number() over (order by f.id desc))as 'No:', i.item_name as 'Ürün:',concat(min(f.unit_price),' ₺') as 'Birim Fiyat:',f.quantity as 'Adet:', f.date as 'Tarih:',f.state as 'Durum:',f.description as 'Açıklama:' from items i, item_adds f where  i.id=f.item_id and f.user_id=" + id + " GROUP by f.item_id", connection);
+				command = SingletonDB.GetInstance.getCommand("select (row_number() over (order by f.id desc))as 'No:', i.item_name as 'Ürün:',concat(min(f.unit_price),' ₺') as 'Birim Fiyat:',f.quantity as 'Adet:', f.date as 'Tarih:',f.state as 'Durum:',f.description as 'Açıklama:' from items i, item_adds f where  i.id=f.item_id and f.user_id=" + id + " GROUP by f.item_id");
 				dt.Load(command.ExecuteReader());
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+
 			return dt;
 		}
 		public bool setItemTransfer(int userID,int itemID,int quantity)
 		{
 			bool state = false;
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
 				Random rnd = new Random();
-				command = new MySqlCommand("insert into item_adds(user_id,item_id,quantity,unit_price,state,description,date) values("+userID+","+itemID+","+quantity+",1,0,'BEKLENİYOR','"+DateTime.Now.ToString()+"')", connection);
+				command = SingletonDB.GetInstance.getCommand("insert into item_adds(user_id,item_id,quantity,unit_price,state,description,date) values("+userID+","+itemID+","+quantity+",1,0,'BEKLENİYOR','"+DateTime.Now.ToString()+"')");
 				command.ExecuteNonQuery();
 				state = true;
 			}
@@ -391,28 +267,12 @@ namespace bitlancer
 				Console.WriteLine(e.Message);
 				state = false;
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
 			return state;
 		}
 		public DataTable getLastOrders(int id = 0, int item_id = 0)
 		{
 			DataTable dt = new DataTable();
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			string toUserOrder = "", toAdmin = "", whereClause = "";
 			if (id != 0)
 			{
@@ -425,29 +285,12 @@ namespace bitlancer
 			}
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("select row_number() over(order by id desc) as 'No:'," + toUserOrder + " order_date as 'Tarih:'," + toAdmin + " (select item_name from items where id = o.item_id) as 'Ürün:',(order_quantity * order_unit_price) as 'Tutar:',(select quantity from item_user_infos where user_id = " + (id!=0?id.ToString():"o.destination_user_id") + " and item_id = 4) as 'Kalan Para:',order_unit_price as 'Birim Fiyat:' from item_orders o " + whereClause, connection);
+				command = SingletonDB.GetInstance.getCommand("select row_number() over(order by id desc) as 'No:'," + toUserOrder + " order_date as 'Tarih:'," + toAdmin + " (select item_name from items where id = o.item_id) as 'Ürün:',(order_quantity * order_unit_price) as 'Tutar:',(select quantity from item_user_infos where user_id = " + (id!=0?id.ToString():"o.destination_user_id") + " and item_id = 4) as 'Kalan Para:',order_unit_price as 'Birim Fiyat:' from item_orders o " + whereClause);
 				dt.Load(command.ExecuteReader());
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
-			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
 			}
 			return dt;
 		}
@@ -455,13 +298,10 @@ namespace bitlancer
 		{
 			User myUser = new User();
 			List<item> MyItems = new List<item>();
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("select * from item_user_infos inner join items on item_user_infos.item_id=items.id where user_id=" + id, connection);
+				command = SingletonDB.GetInstance.getCommand("select * from item_user_infos inner join items on item_user_infos.item_id=items.id where user_id=" + id);
 				MySqlDataReader reader = command.ExecuteReader();
 				while (reader.Read())
 				{
@@ -469,7 +309,7 @@ namespace bitlancer
 					MyItems.Add(tempItem);
 				}
 				reader.Close();
-				command = new MySqlCommand("select * from users where id=" + id, connection);
+				command = SingletonDB.GetInstance.getCommand("select * from users where id=" + id);
 				reader = command.ExecuteReader();
 				while (reader.Read())
 				{
@@ -482,34 +322,17 @@ namespace bitlancer
 
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+
 			return myUser;
 		}
 		public bool setItemOrder(int userIDSource, int userIDDestination, int itemID, int orderQuantity, double unitPrice)
 		{
 			bool state = false;
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
 				Random rnd = new Random();
-				command = new MySqlCommand("insert into item_orders (destination_user_id,source_user_id,item_id,order_unit_price,order_quantity,order_date) values(" + userIDDestination + "," + userIDSource + "," + itemID + ",'" + unitPrice.ToString().Replace(",", ".") + "'," + orderQuantity + ",'" + DateTime.Now.ToString() + "')", connection);
+				command = SingletonDB.GetInstance.getCommand("insert into item_orders (destination_user_id,source_user_id,item_id,order_unit_price,order_quantity,order_date) values(" + userIDDestination + "," + userIDSource + "," + itemID + ",'" + unitPrice.ToString().Replace(",", ".") + "'," + orderQuantity + ",'" + DateTime.Now.ToString() + "')");
 				command.ExecuteNonQuery();
 				state = true;
 			}
@@ -518,28 +341,13 @@ namespace bitlancer
 				Console.WriteLine(e.Message);
 				state = false;
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+			
 			return state;
 		}
 		public bool updateAfterOrder(int selling, int sourceID, int itemID, int quantity, double unitPrice = 1, bool delete = false)
 		{
 			bool state = false;
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
 				string sorgu;
@@ -558,9 +366,7 @@ namespace bitlancer
 						sorgu = "insert into item_user_infos (user_id,item_id,quantity,unit_price,selling) values (" + sourceID + "," + itemID + "," + quantity + ",'" + unitPrice.ToString().Replace(",", ".") + "',0)";
 					}
 				}
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand(sorgu, connection);
+				command = SingletonDB.GetInstance.getCommand(sorgu);
 				command.ExecuteNonQuery();
 				state = true;
 			}
@@ -569,28 +375,12 @@ namespace bitlancer
 				Console.WriteLine(e.Message);
 				state = false;
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
 			return state;
 		}
 		public bool updateOrderToSell(int sourceID, int itemID, int quantity, int All0, int All1, double unitPrice)
 		{
 			bool state = false;
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
 				string sorgum = "";
@@ -616,31 +406,15 @@ namespace bitlancer
 						sorgum += ";delete from item_user_infos where selling=0 and (item_id=" + itemID + " and user_id=" + sourceID + ")";
 					}
 				}
-				connection = getConnection();
-				connection.Open();
 				Random rnd = new Random();
-				command = new MySqlCommand(sorgum, connection);
+				command = SingletonDB.GetInstance.getCommand(sorgum);
 				command.ExecuteNonQuery();
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+
 			return state;
 		}
 		public void manageOrder(int userID, int itemID, int quantity, bitlancer.orderTypes orderType, double unitPriceSell = 0)
@@ -716,13 +490,10 @@ namespace bitlancer
 		public List<orderUpdateItem> getItemsById(int itemID)
 		{
 			List<orderUpdateItem> items = new List<orderUpdateItem>();
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("select user_id,quantity,unit_price from item_user_infos where item_id=" + itemID, connection);
+				command = SingletonDB.GetInstance.getCommand("select user_id,quantity,unit_price from item_user_infos where item_id=" + itemID);
 				MySqlDataReader reader = command.ExecuteReader();
 				while (reader.Read())
 				{
@@ -738,33 +509,16 @@ namespace bitlancer
 			{
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+
 			return items;
 		}
 		public bool updateUser(int id, string userName, string fullName, string password, string tel, string mail, string address)
 		{
 			bool state = false;
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("update users set user_name='" + userName + "', user_full_name='" + fullName + "', user_password='" + password + "', user_tel='" + tel + "', user_mail='" + mail + "', user_address='" + address + "' where id=" + id, connection);
+				command = SingletonDB.GetInstance.getCommand("update users set user_name='" + userName + "', user_full_name='" + fullName + "', user_password='" + password + "', user_tel='" + tel + "', user_mail='" + mail + "', user_address='" + address + "' where id=" + id);
 				command.ExecuteNonQuery();
 				state = true;
 			}
@@ -773,98 +527,46 @@ namespace bitlancer
 				Console.WriteLine(e.Message);
 				state = false;
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+			
 			return state;
 		}
 		public void uptadeAdminOnayDataGrid(int id, int state, string description)
-		{ 
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+		{
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
 				Random rnd = new Random();
-				command = new MySqlCommand("update item_adds set state =" + state + ", description ='" + description + "' where id="+id , connection);
+				command = SingletonDB.GetInstance.getCommand("update item_adds set state =" + state + ", description ='" + description + "' where id="+id );
 				command.ExecuteNonQuery();
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+
 		}
 		public DataTable GetTable(string sql)
         {
 			DataTable dt = new DataTable();
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand(sql, connection);
+				command = SingletonDB.GetInstance.getCommand(sql);
 				dt.Load(command.ExecuteReader());
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
 			return dt;
 		}
 		public bool userRegister(string userFullName,string userName, string userPassword, string userAddres,string userMail,string userTc,string userTel)
 		{
 			bool state = false;
-			MySqlConnection connection = null;
-			MySqlCommand command = null;
+			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				connection = getConnection();
-				connection.Open();
-				command = new MySqlCommand("insert into users(user_full_name,user_name,user_password,user_address,user_mail,user_tc,user_tel,user_type_id) values ('" + userFullName+"','" +userName + "','" + userPassword+"','" + userAddres + "','" + userMail + "','" + userTc+ "','" + userTel + "','" + 6 + "')", connection);
+				command = SingletonDB.GetInstance.getCommand("insert into users(user_full_name,user_name,user_password,user_address,user_mail,user_tc,user_tel,user_type_id) values ('" + userFullName+"','" +userName + "','" + userPassword+"','" + userAddres + "','" + userMail + "','" + userTc+ "','" + userTel + "','" + 6 + "')");
 				command.ExecuteNonQuery();
 				state = true;
 			}
@@ -873,21 +575,7 @@ namespace bitlancer
 				Console.WriteLine(e.Message);
 				state = false;
 			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						command.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
+
 			return state;
 		}
 	}
