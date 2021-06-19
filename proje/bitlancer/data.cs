@@ -333,10 +333,13 @@ namespace bitlancer
 		{
 			bool state = false;
 			MySqlCommand command = new MySqlCommand();
+			MySqlCommand command2 = new MySqlCommand();
+			
 			try
 			{
 				Random rnd = new Random();
 				command = SingletonDB.GetInstance.getCommand("insert into item_orders (destination_user_id,source_user_id,item_id,order_unit_price,order_quantity,order_date) values(" + userIDDestination + "," + userIDSource + "," + itemID + ",'" + unitPrice.ToString().Replace(",", ".") + "'," + orderQuantity + ",'" + DateTime.Now.ToString() + "')");
+				//command2 = SingletonDB.GetInstance.getCommand("UPDATE item_user_infos SET quantity = quantity- " +orderQuantity+" WHERE s")
 				command.ExecuteNonQuery();
 				state = true;
 			}
@@ -363,7 +366,7 @@ namespace bitlancer
 				{
 					if (getId("select id from item_user_infos where selling=" + selling + " and (item_id=" + itemID + " and user_id=" + sourceID + ")") != 0)
 					{
-						sorgu = "update item_user_infos set quantity=" + quantity + " where  selling=" + selling + " and (item_id=" + itemID + " and user_id=" + sourceID + ")";
+						sorgu = "update item_user_infos set quantity= " + quantity + " where  selling=" + selling + " and (item_id=" + itemID + " and user_id=" + sourceID + ")";
 					}
 					else
 					{
