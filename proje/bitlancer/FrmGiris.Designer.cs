@@ -90,6 +90,7 @@
             this.btnGirisYap.TabIndex = 6;
             this.btnGirisYap.Text = "GİRİŞ YAP";
             this.btnGirisYap.UseVisualStyleBackColor = false;
+            this.btnGirisYap.Click += new System.EventHandler(this.btnGirisYap_Click_1);
             // 
             // linkLabelKayitOl
             // 
@@ -101,6 +102,7 @@
             this.linkLabelKayitOl.TabIndex = 5;
             this.linkLabelKayitOl.TabStop = true;
             this.linkLabelKayitOl.Text = "Kayıt Ol";
+            this.linkLabelKayitOl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelKayitOl_LinkClicked_1);
             // 
             // userpassword_textbox
             // 

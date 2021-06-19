@@ -27,7 +27,7 @@ namespace bitlancer
 			MySqlConnection connection = null;
 			try
 			{
-				connection = new MySqlConnection("server=localhost;user id=root;database=bitlancer-aes-final");
+				connection = new MySqlConnection("server=localhost;port=3307;user=root;database=aesfinal");
 			}
 			catch (Exception e)
 			{
@@ -41,7 +41,7 @@ namespace bitlancer
 
 			MySqlDataAdapter adtr = null;
 			MySqlConnection connection = null;
-			connection = getConnection();
+			connection = SingletonDB.GetInstance.getConnection();
 			connection.Open();
 			try
 			{
@@ -52,6 +52,7 @@ namespace bitlancer
 				Console.WriteLine(e.Message);
 			}
 			return adtr;
+			
 		}
 
 		public MySqlCommand getCommand(string sql)
@@ -59,11 +60,14 @@ namespace bitlancer
 
 			MySqlCommand command = null;
 			MySqlConnection connection = null;
-			connection = getConnection();
-			connection.Open();
+			connection = SingletonDB.GetInstance.getConnection();
+			if (connection.State != ConnectionState.Open)
+            {
+				connection.Open();
+            }
 			try
 			{
-				command = SingletonDB.GetInstance.getCommand(sql);
+				command = new MySqlCommand(sql,connection);
 			}
 			catch (Exception e)
 			{
@@ -131,7 +135,7 @@ namespace bitlancer
 			MySqlCommand command = new MySqlCommand();
 			try
 			{
-				command = SingletonDB.GetInstance.getCommand("select user_name, user_password from users");
+				command = SingletonDB.GetInstance.getCommand("SELECT user_name, user_password FROM users");
 				MySqlDataReader read = command.ExecuteReader();
 				while (read.Read())
 				{
@@ -144,7 +148,7 @@ namespace bitlancer
 				}
 			}
 			catch (Exception e)
-			{
+				{
 				Console.WriteLine("hata: " + e.Message);
 			}
 			

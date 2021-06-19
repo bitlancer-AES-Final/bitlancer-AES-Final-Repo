@@ -78,9 +78,9 @@ namespace bitlancer
         {
             lblUrunAd.Text = myItem.itemName;
             quantity.Text = "Maksimum Miktar: " + myItem.quantity;
-            itemPriceLabel.Text = myItem.unitPrice + " ₺ : ";
+            itemPriceLabel.Text = myItem.unitPrice + " ₺ : "; //burasi degiscek.
             transferlerDatgrid.DataSource = lastOrdersData;
-            if (quantityTextBox.Text != ""&&islem==bitlancer.orderTypes.buy)
+            if (quantityTextBox.Text != "" && islem == bitlancer.orderTypes.buy)
             {
                 try
                 {
@@ -93,7 +93,7 @@ namespace bitlancer
             }
             if (x >= 250)
             {
-                chart.Series["line"].Points.RemoveAt(0);
+                chart.Series["line"].Points.RemoveAt(0);  //burayı anlamadim. x'in olayini ayrica chart muhabbetini de.
             }
             else
             {
@@ -123,7 +123,7 @@ namespace bitlancer
             lastOrdersData = SingletonDB.GetInstance.getLastOrders(userID,itemID);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void picBoxDegisiklik_Click(object sender, EventArgs e)
         {
             
             if (islem == bitlancer.orderTypes.sell)
@@ -164,8 +164,13 @@ namespace bitlancer
                 picBoxDegisiklik.Enabled = false;
                 picBoxYuklenme.Visible = true;
                 picBoxYuklenme.Enabled = true;
-                label3.Visible = true;
+                lblMesaj.Visible = true;
             }
+           /* else if(quantityTextBox )
+            {
+
+
+            }*/
             else
             {
                 MessageBox.Show("Maksimum Miktardan Fazla Alamazsınız!", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -186,7 +191,7 @@ namespace bitlancer
             picBoxDegisiklik.Enabled = true;
             picBoxYuklenme.Visible = false;
             picBoxYuklenme.Enabled = false;
-            label3.Visible = false;
+            lblMesaj.Visible = false;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
