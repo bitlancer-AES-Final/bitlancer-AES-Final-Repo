@@ -1,2 +1,15 @@
-# bitlancer-AES-Final-Repo
-Yazılım yapımı final ödevi için bitlancer'dan türeyen yeni versiyon grup Aleyna, Enes ve Simge
+## bitlancer-AES-Final-Repo
+
+**bitlancer Final Uygulaması**
+
+*Borsa platformu içerisinde alış ve satış işlemlerinin gerçekleşmesi.*
+
+**Projeyi Geliştirenler**
+
+*Enes Ertuğrul KOYUNCU*
+
+*Simge POLAT*
+
+*Ali Eren ERİŞ*
+
+*Ayşe Aleyna YAVUZ*
