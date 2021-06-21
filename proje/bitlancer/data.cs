@@ -72,6 +72,45 @@ namespace bitlancer
 			}
 			return id;
 		}
+
+		public DataTable getLastOrderBetweenDate(int id, DateTime date1, DateTime date2)
+		{
+			DataTable dtbl = new DataTable();
+			MySqlConnection connection = null;
+			MySqlCommand command = null;
+			string dtbl1 = date1.ToString("yyyy-MM-dd"); //dateTimePickerBaslangic
+			string dtbl2 = date2.ToString("yyyy-MM-dd"); //dateTimePickerBitis
+			string toUseOrder = "(Case WHEN destination_user_id= " + id + " THEN 'ALIM' ELSE 'SATIM' END) as 'İşlem: ',";
+			try
+			{
+				connection = getConnection();
+				connection.Open();
+				command = new MySqlCommand("select row_number() over(order by id desc) as 'No:', " + toUseOrder + " order_date as 'Tarih:', (select item_name from items where id= o.item_id) as 'Para Birimi:', order_quantity as 'Miktari:', (order_quantity * order_unit_price) as 'Tutar:', )", connection);
+				dtbl.Load(command.ExecuteReader());
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+			finally
+			{
+				if (connection != null)
+				{
+					try
+					{//bağlantıları kapat
+						connection.Close();
+						command.Dispose();
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine(e.Message);
+					}
+				}
+			}
+			return dtbl;
+		}
+
+
 		public double getDouble(string sql)
 		{
 			double val = 0;

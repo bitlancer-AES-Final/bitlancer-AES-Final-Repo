@@ -61,12 +61,11 @@ namespace bitlancer
 
             int tutar = (int)(quantity * unit_price);
 
-            int itemQuantity = SingletonDB.GetInstance.getId("select quantity from item_user_infos where  selling=0 and (item_id=4 and user_id=" + user_id + ")");//????
+            int itemQuantity = SingletonDB.GetInstance.getId("select quantity from item_user_infos where  selling=0 and (item_id=4 and user_id=" + user_id + ")");
             SingletonDB.GetInstance.uptadeAdminOnayDataGrid(_id, state, description, unit_price);
-            SingletonDB.GetInstance.updateAfterOrder(0, user_id, 4, (int)(itemQuantity + (tutar * 0.99))); //muhasebe aracılık ücreti geri kalan yuzdenin kullanıcıya aktarılan kısmı
-            int itemQuantityAdmin = SingletonDB.GetInstance.getId("select quantity from item_user_infos where  selling=0 and (item_id=4" + item_id + " and user_id=3)");//?????
+            SingletonDB.GetInstance.updateAfterOrder(0, user_id, 4, (int)(itemQuantity + (tutar * 0.99))); //muhasebe aracılık ücreti geri kalan yuzdenin kullanıcıya aktarılan kısım
+            int itemQuantityAdmin = SingletonDB.GetInstance.getId("select quantity from item_user_infos where  selling=0 and (item_id=4 and user_id=3)");
             SingletonDB.GetInstance.updateAfterOrder(0, 3, 4, (int)(itemQuantityAdmin + (tutar * 0.01))); //muhasebe aracılık ücreti yuzde bir alınan kısım
-
 
             veriReset();
         }
