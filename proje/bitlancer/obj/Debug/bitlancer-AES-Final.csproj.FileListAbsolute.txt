@@ -16,3 +16,4 @@ C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer
 C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\obj\Debug\bitlancer-AES-Final.csproj.CopyComplete
 C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\obj\Debug\bitlancer.exe
 C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\obj\Debug\bitlancer.pdb
+C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\obj\Debug\bitlancer.orderRequest.resources

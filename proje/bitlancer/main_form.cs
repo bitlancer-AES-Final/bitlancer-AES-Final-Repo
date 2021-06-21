@@ -41,6 +41,20 @@ namespace bitlancer
                 }
             }
         }
+        public void setOrderRequestDataGrid()
+        {
+            DataTable dtbl = new DataTable();
+            dtbl = SingletonDB.GetInstance.setOrderRequestDataTable();
+            orderRequestDataGrid.DataSource = dtbl;
+
+        }
+        public void setOrderRequestHistoryDataGrid()
+        {
+            DataTable dtbl = new DataTable();
+            dtbl = SingletonDB.GetInstance.setOrderRequestHistoryDataTable();
+            orderRequestHistoryDataGrid.DataSource = dtbl;
+
+        }
         public void setUserToUI()
         {
             try
@@ -56,6 +70,7 @@ namespace bitlancer
                 transferlerDatgrid.DataSource = userTransfers;
                 transferlerDatgrid.Columns[2].Visible = false;
                 setLastOrder();
+                setOrderRequestDataGrid();
                 kullancıAdLabel.Text = MyUser.fullName;
                 switch (MyUser.userType)
                 {
@@ -107,6 +122,8 @@ namespace bitlancer
             MyUser = SingletonDB.GetInstance.getUser(userID);
             userTransfers = SingletonDB.GetInstance.getItemTransfers(MyUser.id);
             lastOrdersData = SingletonDB.GetInstance.getLastOrders(userID);
+            SingletonDB.GetInstance.orderRequestCheck();
+            
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

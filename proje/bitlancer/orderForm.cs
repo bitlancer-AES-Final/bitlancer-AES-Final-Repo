@@ -115,6 +115,7 @@ namespace bitlancer
                 myItem = SingletonDB.GetInstance.getItem(itemID);
                 myItem.quantity = SingletonDB.GetInstance.getId("select quantity from item_user_infos where selling=0 and (item_id=" + itemID + " and user_id=" + userID + ")");
                 myItem.unitPrice = SingletonDB.GetInstance.getDouble("select min(unit_price) from item_user_infos where selling=1 and item_id="+itemID);
+
             }
             else
             {
@@ -166,11 +167,7 @@ namespace bitlancer
                 picBoxYuklenme.Enabled = true;
                 lblMesaj.Visible = true;
             }
-           /* else if(quantityTextBox )
-            {
 
-
-            }*/
             else
             {
                 MessageBox.Show("Maksimum Miktardan Fazla Alamazsınız!", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -192,6 +189,12 @@ namespace bitlancer
             picBoxYuklenme.Visible = false;
             picBoxYuklenme.Enabled = false;
             lblMesaj.Visible = false;
+        }
+
+        private void btnIstek_Click(object sender, EventArgs e)
+        {
+            orderRequest orderRequest1 = new orderRequest(userID, itemID);
+            orderRequest1.ShowDialog();
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
