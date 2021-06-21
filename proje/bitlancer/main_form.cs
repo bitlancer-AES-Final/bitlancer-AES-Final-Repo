@@ -51,6 +51,14 @@ namespace bitlancer
             orderRequestDataGrid.DataSource = dtbl;
 
         }
+        public void setRaporDataTableRefresh()
+        {
+            DataTable dtbl = new DataTable();
+            dtbl = SingletonDB.GetInstance.setRaporDataTable();
+            dgwRaporBilgileri.DataSource = dtbl;
+
+        }
+
         public void setOrderRequestHistoryDataGrid()
         {
             DataTable dtbl = new DataTable();
@@ -74,6 +82,8 @@ namespace bitlancer
                 transferlerDatgrid.Columns[2].Visible = false;
                 setLastOrder();
                 setOrderRequestDataGrid();
+                setRaporDataTableRefresh();
+                setOrderRequestHistoryDataGrid();
                 kullancıAdLabel.Text = MyUser.fullName;
                 switch (MyUser.userType)
                 {
@@ -112,10 +122,12 @@ namespace bitlancer
                 Console.WriteLine(e.Message);
             }
         }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (!backgroundWorker1.IsBusy)
             {
+
                 backgroundWorker1.RunWorkerAsync();
             }
         }
@@ -172,8 +184,8 @@ namespace bitlancer
 
         private void btnRaporOlustur_Click(object sender, EventArgs e)
         {
-            DataTable reportData = SingletonDB.GetInstance.getLastOrderBetweenDate(userID, date1.Value, date2.Value);
-            CreateReport(reportData);
+            DataTable dtbl = SingletonDB.GetInstance.setRaporDataTable();
+            CreateReport(dtbl);
         }
 
         public void CreateReport(DataTable data)
@@ -199,6 +211,7 @@ namespace bitlancer
                 }
             }
         }
+
 
         private void userInfoButton_Click(object sender, EventArgs e)
         {

@@ -17,3 +17,11 @@ C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer
 C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\obj\Debug\bitlancer.exe
 C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\obj\Debug\bitlancer.pdb
 C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\obj\Debug\bitlancer.orderRequest.resources
+C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\bin\Debug\ClosedXML.dll
+C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\bin\Debug\ExcelNumberFormat.dll
+C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\bin\Debug\ClosedXML.pdb
+C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\bin\Debug\ClosedXML.xml
+C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\bin\Debug\ExcelNumberFormat.xml
+C:\Users\asus\OneDrive\Documents\GitHub\bitlancer-AES-Final-Repo\proje\bitlancer\obj\Debug\bitlancer-AES-Final.csproj.ResolveComReference.cache
