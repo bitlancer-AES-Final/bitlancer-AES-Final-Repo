@@ -78,8 +78,8 @@ namespace bitlancer
 			DataTable dtbl = new DataTable();
 			MySqlConnection connection = null;
 			MySqlCommand command = null;
-			string dtbl1 = date1.ToString("yyyy-MM-dd"); //dateTimePickerBaslangic
-			string dtbl2 = date2.ToString("yyyy-MM-dd"); //dateTimePickerBitis
+			string dtbl1 = date1.ToString("yyyy-MM-dd");
+			string dtbl2 = date2.ToString("yyyy-MM-dd"); 
 			string toUseOrder = "(Case WHEN destination_user_id= " + id + " THEN 'ALIM' ELSE 'SATIM' END) as 'İşlem: ',";
 			try
 			{

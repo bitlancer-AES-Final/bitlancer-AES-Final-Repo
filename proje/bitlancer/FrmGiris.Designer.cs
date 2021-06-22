@@ -50,7 +50,7 @@
             this.pnlArkaPlan.Location = new System.Drawing.Point(0, 0);
             this.pnlArkaPlan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlArkaPlan.Name = "pnlArkaPlan";
-            this.pnlArkaPlan.Size = new System.Drawing.Size(1021, 571);
+            this.pnlArkaPlan.Size = new System.Drawing.Size(918, 571);
             this.pnlArkaPlan.TabIndex = 0;
             // 
             // lblKullaniciGirisPaneli
@@ -58,7 +58,7 @@
             this.lblKullaniciGirisPaneli.AutoSize = true;
             this.lblKullaniciGirisPaneli.BackColor = System.Drawing.Color.Transparent;
             this.lblKullaniciGirisPaneli.Font = new System.Drawing.Font("Monotype Corsiva", 40F, System.Drawing.FontStyle.Italic);
-            this.lblKullaniciGirisPaneli.Location = new System.Drawing.Point(225, 35);
+            this.lblKullaniciGirisPaneli.Location = new System.Drawing.Point(149, 35);
             this.lblKullaniciGirisPaneli.Name = "lblKullaniciGirisPaneli";
             this.lblKullaniciGirisPaneli.Size = new System.Drawing.Size(551, 82);
             this.lblKullaniciGirisPaneli.TabIndex = 7;
@@ -73,7 +73,7 @@
             this.pnlGiris.Controls.Add(this.lblSifre);
             this.pnlGiris.Controls.Add(this.username_textbox);
             this.pnlGiris.Controls.Add(this.lblKullaniciAdi);
-            this.pnlGiris.Location = new System.Drawing.Point(265, 148);
+            this.pnlGiris.Location = new System.Drawing.Point(189, 148);
             this.pnlGiris.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlGiris.Name = "pnlGiris";
             this.pnlGiris.Size = new System.Drawing.Size(475, 374);
@@ -150,7 +150,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1021, 571);
+            this.ClientSize = new System.Drawing.Size(918, 571);
             this.Controls.Add(this.pnlArkaPlan);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
