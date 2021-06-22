@@ -80,13 +80,12 @@ namespace bitlancer
 			MySqlCommand command = null;
 			string dtbl1 = date1.ToString("yyyy-MM-dd");
 			string dtbl2 = date2.ToString("yyyy-MM-dd"); 
-			string toUseOrder = "(Case WHEN destination_user_id= " + id + " THEN 'ALIM' ELSE 'SATIM' END) as 'İşlem: ',";
+			string toUserOrder = "(Case WHEN destination_user_id= " + id + " THEN 'ALIM' ELSE 'SATIM' END) as 'İşlem: ',";
 			try
 			{
 				connection = getConnection();
 				connection.Open();
-				command = new MySqlCommand("select row_number() over(order by id desc) as 'No:', " + toUseOrder + " order_date as 'Tarih:', (select item_name from items where id= o.item_id) as 'Para Birimi:', order_quantity as 'Miktari:', (order_quantity * order_unit_price) as 'Tutar:', )", connection);
-				dtbl.Load(command.ExecuteReader());
+				command = new MySqlCommand("select row_number() over(order by id desc) as 'No:', " + toUserOrder + "order_date as 'Tarih:', (select item_name from items where id = o.item_id) as 'Para Birimi:',order_quantity as 'Miktar:',(order_quantity * order_unit_price) as 'Tutar:',order_unit_price as 'Birim Fiyat:' from item_orders o where (destination_user_id=" + id + " or source_user_id=" + id + ") and (DATE(concat(RIGHT(LEFT(order_date,10),4),'-',SUBSTRING(order_date,4,2),'-',LEFT(order_date,2))) BETWEEN CAST('" + date1 + "' as DATE) and CAST('" + date2 + "' as DATE))", connection); dtbl.Load(command.ExecuteReader());
 			}
 			catch (Exception e)
 			{
@@ -627,18 +626,15 @@ namespace bitlancer
 			return state;
 		}
 
-		public bool updateAfterOrderRequest(int source_user_id, int destination_user_id, int item_id, int quantity, double unitPrice, bool source) //bool source kismi guncelleme isinin kaynakta mi hedefte mi yapildigini gosteriyor.
+		public bool updateAfterOrderRequest(int source_user_id, int destination_user_id, int item_id, int quantity,double destination_wanted_price, bool source) //bool source kismi guncelleme isinin kaynakta mi hedefte mi yapildigini gosteriyor.
         {
 			
 			bool state = true;
 			MySqlCommand command3 = null;
-			MySqlCommand commandControlPriceQuantity = null;
+			MySqlCommand commandReqID = null;
 			MySqlConnection connection = null;
 			MySqlConnection connection2 = null;
-			MySqlDataReader readCommandControlPQ = null;
-			double _price=0;
-			int _quantity=0;
-			double moneyNeeded=0;
+			MySqlDataReader readCommandReqID = null;
 			int request_id = 0;
 			int sourceTotalMoney = 0;
 			try
@@ -650,21 +646,19 @@ namespace bitlancer
 					try
                     {
 						sourceTotalMoney = getId("SELECT quantity FROM item_user_infos WHERE user_id=" + source_user_id + " AND item_id= 4");
-						commandControlPriceQuantity = new MySqlCommand("SELECT o.order_request_unit_price, o.order_request_quantity, o.request_id FROM item_user_infos u, item_order_request o, items i WHERE o.state = 0 AND u.selling = 1 AND o.item_id = u.item_id AND o.order_request_unit_price >= u.unit_price AND o.order_request_quantity <= u.quantity GROUP BY u.unit_price", connection);
-						readCommandControlPQ = commandControlPriceQuantity.ExecuteReader();
+						commandReqID = new MySqlCommand("SELECT o.request_id FROM item_user_infos u, item_order_request o WHERE o.state = 0 AND u.selling = 1 AND o.item_id = u.item_id AND o.order_request_unit_price >= u.unit_price AND o.order_request_quantity <= u.quantity GROUP BY u.unit_price", connection);
+						readCommandReqID = commandReqID.ExecuteReader();
 						bool firstPriceSelect = true;
-						while (readCommandControlPQ.Read() && firstPriceSelect)
+						while (readCommandReqID.Read() && firstPriceSelect)
 						{
-							_price = Convert.ToDouble(readCommandControlPQ[0]);		// gereken total para icin birim fiyat bul.
-							_quantity = Convert.ToInt32(readCommandControlPQ[1]);	// gereken total para için miktar bul
-							request_id = Convert.ToInt32(readCommandControlPQ[2]);	// request_id bul.
-							moneyNeeded = _quantity * _price;						// gereken total para 
+							request_id = Convert.ToInt32(readCommandReqID[0]);	// request_id bul.
 							firstPriceSelect = false;
 						}
 						connection.Close();
 						connection2 = getConnection();
 						connection2.Open();
-						if (sourceTotalMoney < moneyNeeded)
+						// DataReader ile ExecuteNonQuery ayni connection uzerinde calisamiyor.
+						if (sourceTotalMoney < ((int)destination_wanted_price * quantity))
 						{
 							state = false;
 						}
@@ -672,14 +666,13 @@ namespace bitlancer
 						{
 							try
 							{
-								int sourceGetSourceTL = getId("select quantity from item_user_infos where item_id=4 and user_id="+source_user_id);
-								int sourceGetSourceItem = getId("select quantity from item_user_infos where item_id="+item_id+" and user_id=" + source_user_id);
-								updateAfterOrder(0,source_user_id,4,(sourceGetSourceTL-(int)moneyNeeded),unitPrice);
-								updateAfterOrder(0, source_user_id, item_id, (sourceGetSourceItem+quantity), unitPrice);
-								command3 = new MySqlCommand("INSERT INTO source_destination_change_log (request_id, item_id, source_user_id, destination_user_id, order_request_unit_price, order_request_quantity, state_source, source_change_date ) VALUES (" + request_id + ", " + item_id + ", " + source_user_id + ", " + destination_user_id + ", " + unitPrice + ", " + quantity + ", 1,'" + DateTime.Now.ToString() + "' )", connection2); 
-								// source parasi gider karsiliginda item alir
-								command3.ExecuteNonQuery();
-								// yapilan degisiklikleri database'e kaydettik, istenildigi zaman geri donus islemi yapilabilsin.
+								int sourceGetSourceTL = getId("select quantity from item_user_infos where item_id=4 and user_id= "+source_user_id);
+								int sourceGetSourceItem = getId("select quantity from item_user_infos where item_id="+item_id+" and user_id= " + source_user_id);
+								updateAfterOrder(0,source_user_id,4,(sourceGetSourceTL- ((int)destination_wanted_price * quantity)),destination_wanted_price);
+								updateAfterOrder(0, source_user_id, item_id, (sourceGetSourceItem+quantity), destination_wanted_price);
+								
+								command3 = new MySqlCommand("INSERT INTO source_destination_change_log (request_id, item_id, source_user_id, destination_user_id, order_request_unit_price, order_request_quantity, state_source, source_change_date ) VALUES (" + request_id + ", " + item_id + ", " + source_user_id + ", " + destination_user_id + ", " + destination_wanted_price + ", " + quantity + ", 1,'" + DateTime.Now.ToString() + "' )", connection2); 
+								command3.ExecuteNonQuery(); // yapilan degisiklikleri database'e kaydettik, istenildigi zaman geri donus islemi yapilabilsin.
 								state = true;
 							}
 							catch (Exception err)
@@ -698,29 +691,28 @@ namespace bitlancer
 				{
                     try 
 					{
-						commandControlPriceQuantity = new MySqlCommand("SELECT o.order_request_unit_price, o.order_request_quantity, o.request_id FROM item_user_infos u, item_order_request o, items i WHERE o.state = 0 AND u.selling = 1 AND o.item_id = u.item_id AND o.order_request_unit_price >= u.unit_price AND o.order_request_quantity <= u.quantity GROUP BY u.unit_price", connection);
-						readCommandControlPQ = commandControlPriceQuantity.ExecuteReader();
+						commandReqID = new MySqlCommand("SELECT  o.request_id FROM item_user_infos u, item_order_request o, items i WHERE o.state = 0 AND u.selling = 1 AND o.item_id = u.item_id AND o.order_request_unit_price >= u.unit_price AND o.order_request_quantity <= u.quantity GROUP BY u.unit_price", connection);
+						readCommandReqID = commandReqID.ExecuteReader();
 
 						bool firstPriceSelect = true;
-						while (readCommandControlPQ.Read() && firstPriceSelect)
+						while (readCommandReqID.Read() && firstPriceSelect)
 						{
-							_price = Convert.ToDouble(readCommandControlPQ[0]);		// gereken total para icin birim fiyat bul.
-							_quantity = Convert.ToInt32(readCommandControlPQ[1]);	// gereken total para için miktar bul
-							request_id = Convert.ToInt32(readCommandControlPQ[2]);	// request id bul
-							moneyNeeded = _quantity * _price;						// gereken total para 
+							request_id = Convert.ToInt32(readCommandReqID[0]);	// request id bul
 							firstPriceSelect = false;
 						}
 						connection.Close();
 						connection2 = getConnection();
 						connection2.Open();
+						// DataReader ile ExecuteNonQuery ayni connection uzerinde calisamiyor.
+
 						try
 						{
 							int destinationGetDestinationTL= getId("select quantity from item_user_infos where item_id=4 and user_id=" + destination_user_id);
-							int sourceGetSourceItem = getId("select quantity from item_user_infos where item_id=" + item_id + " and user_id=" + destination_user_id);
-							updateAfterOrder(0, destination_user_id, 4, (destinationGetDestinationTL + (int)moneyNeeded), unitPrice);
-							updateAfterOrder(1, destination_user_id, item_id, (sourceGetSourceItem - quantity), unitPrice);
+							int destinationGetDestinationItem = getId("select quantity from item_user_infos where item_id=" + item_id + " and user_id=" + destination_user_id);
+							updateAfterOrder(0, destination_user_id, 4, (destinationGetDestinationTL + ((int)destination_wanted_price * quantity)), destination_wanted_price);
+							updateAfterOrder(1, destination_user_id, item_id, (destinationGetDestinationItem - quantity), destination_wanted_price);
 
-							command3 = new MySqlCommand("INSERT INTO source_destination_change_log (request_id, item_id, source_user_id, destination_user_id, order_request_unit_price, order_request_quantity, state_destination, destination_change_date ) VALUES (" + request_id + ", " + item_id + ", " + source_user_id + ", " + destination_user_id + ", " + _price + "," + _quantity + ", 1 ,'" + DateTime.Now.ToString() + "')", connection2);
+							command3 = new MySqlCommand("INSERT INTO source_destination_change_log (request_id, item_id, source_user_id, destination_user_id, order_request_unit_price, order_request_quantity, state_destination, destination_change_date ) VALUES (" + request_id + ", " + item_id + ", " + source_user_id + ", " + destination_user_id + ", " + destination_wanted_price + "," + quantity + ", 1 ,'" + DateTime.Now.ToString() + "')", connection2);
 							command3.ExecuteNonQuery();  // yapilan degisiklikleri database'e kaydettik, istenildigi zaman geri donus islemi yapilabilsin.
 							state = true;
 						}
@@ -998,17 +990,17 @@ namespace bitlancer
 		}
 
 
-		public bool manageOrderRequest(int source_user_id,int destination_user_id, int item_id, int order_request_quantity, double order_request_unit_price, int request_id )
+		public bool manageOrderRequest(int source_user_id,int destination_user_id, int item_id, double order_request_unit_price, int order_request_quantity, double destination_wanted_price, int request_id )
         {
-			bool siraAtlama = true;
+			
 			MySqlConnection connection = null;
 			MySqlCommand command = null;
 			connection = getConnection();
 			connection.Open();
 			try
             {
-				updateAfterOrderRequest(source_user_id, destination_user_id, item_id, order_request_quantity, order_request_unit_price, true); //source user money/item change
-				updateAfterOrderRequest(source_user_id, destination_user_id, item_id, order_request_quantity, order_request_unit_price, false); //destination user money/item change
+				updateAfterOrderRequest(source_user_id, destination_user_id, item_id, order_request_quantity, destination_wanted_price, true); //source user money/item change
+				updateAfterOrderRequest(source_user_id, destination_user_id, item_id, order_request_quantity, destination_wanted_price, false); //destination user money/item change
 				
 					command = new MySqlCommand("UPDATE item_order_request SET destination_user_id =" + destination_user_id + ", state = 1, order_request_finish_date = '" + DateTime.Now.ToString() + "' WHERE request_id ="+ request_id, connection);
 					command.ExecuteNonQuery();
@@ -1036,11 +1028,11 @@ namespace bitlancer
 					}
 				}
 			}
-			return siraAtlama;
+			return true; 
 		}
 
 		//database'e istek kaydedilir
-		public MySqlCommand refOrderRequest(int _item_id, int _userID, string DesiredPrice, string DesiredQuantity)
+		public MySqlCommand refOrderRequest(int _item_id, int _userID, double DesiredPrice, int DesiredQuantity)
         {
 			MySqlConnection connection = null;
 			MySqlCommand command = null;
@@ -1048,7 +1040,7 @@ namespace bitlancer
 			connection.Open();
 			try
             {
-				command = new MySqlCommand("INSERT INTO item_order_request (item_id, source_user_id, order_request_unit_price, order_request_quantity, state, order_request_date ) VALUES ("+_item_id+", "+_userID+", "+DesiredPrice+", "+DesiredQuantity+", 0, "+DateTime.Now.ToString()+") ", connection);
+				command = new MySqlCommand("INSERT INTO item_order_request (item_id, source_user_id, order_request_unit_price, order_request_quantity, state, order_request_date ) VALUES ("+_item_id+", "+_userID+", "+DesiredPrice+", "+DesiredQuantity+", 0, '"+DateTime.Now.ToString()+"') ", connection);
 				command.ExecuteNonQuery();
 			}
 			catch (Exception e)
@@ -1082,11 +1074,11 @@ namespace bitlancer
 			try
             {
 				bool siraAtla = false;
-				command = new MySqlCommand("SELECT  o.source_user_id as 'Kaynak ID', u.user_id as 'Hedef ID ',(select item_name from items where id=u.item_id) as 'item', u.item_id as 'item id', o.order_request_unit_price as 'istek fiyatı', o.order_request_quantity as 'istek miktari', u.unit_price as 'Hedef Fiyati', u.quantity as 'hedef miktari', o.request_id  FROM item_user_infos u, item_order_request o WHERE ((o.state = 0 AND u.selling = 1) AND (o.item_id = u.item_id AND o.order_request_unit_price >= u.unit_price)) AND (o.order_request_quantity <= u.quantity and (select quantity from item_user_infos where user_id=o.source_user_id and item_id=4)>=u.unit_price*o.order_request_quantity)GROUP BY u.unit_price", connection);
+				command = new MySqlCommand("SELECT  o.source_user_id , u.user_id ,(select item_name from items where id=u.item_id) as 'item', u.item_id , o.order_request_unit_price, o.order_request_quantity, u.unit_price, u.quantity , o.request_id  FROM item_user_infos u, item_order_request o WHERE ((o.state = 0 AND u.selling = 1) AND (o.item_id = u.item_id AND o.order_request_unit_price >= u.unit_price)) AND (o.order_request_quantity <= u.quantity and (select quantity from item_user_infos where user_id=o.source_user_id and item_id=4)>=u.unit_price*o.order_request_quantity)GROUP BY u.unit_price ", connection);
 				MySqlDataReader readCommand = command.ExecuteReader();
 				while (readCommand.Read() == true && siraAtla == false)
                 {
-					siraAtla = manageOrderRequest(Convert.ToInt32(readCommand[0]), Convert.ToInt32(readCommand[1]), Convert.ToInt32(readCommand[3]), Convert.ToInt32(readCommand[5]), Convert.ToDouble(readCommand[4]), Convert.ToInt32(readCommand[6]));
+					siraAtla = manageOrderRequest(Convert.ToInt32(readCommand[0]), Convert.ToInt32(readCommand[1]), Convert.ToInt32(readCommand[3]), Convert.ToDouble(readCommand[4]), Convert.ToInt32(readCommand[5]) ,Convert.ToDouble(readCommand[6]), Convert.ToInt32(readCommand[8]));
 					
                 }
 
@@ -1113,7 +1105,7 @@ namespace bitlancer
 			
 		}
 		//istek listesi tablosunu gunceller
-		public DataTable setOrderRequestDataTable()
+		public DataTable setDataTable(string sql)
         {
 			MySqlDataAdapter adtr = null;
 			MySqlConnection connection = null;
@@ -1122,7 +1114,8 @@ namespace bitlancer
 			DataTable dtbl = new DataTable();
 			try
             {
-				adtr = new MySqlDataAdapter("SELECT * FROM item_order_request WHERE state = 0", connection);
+				//
+				adtr = new MySqlDataAdapter(sql, connection);
 				adtr.Fill(dtbl);
 
 			}
@@ -1148,75 +1141,8 @@ namespace bitlancer
 			return dtbl;
         }
 
-		public DataTable setRaporDataTable() //buraya bak
-		{
-			MySqlDataAdapter adtr = null;
-			MySqlConnection connection = null;
-			connection = getConnection();
-			connection.Open();
-			DataTable dtbl = new DataTable();
-			try
-			{
-				adtr = new MySqlDataAdapter("SELECT o.request_id as 'Islem No:', (select item_name from items where id =  s.item_id) as 'Item Name:', (select user_full_name from users WHERE s.source_user_id = u.id) as 'Source Person: ', (select user_full_name from users WHERE s.destination_user_id = u.id) as 'Destination Person: ', s.order_request_unit_price as 'Unit Price: ', s.order_request_quantity as 'Quantity: ', o.order_request_date as 'Start Date: ', o.order_request_finish_date as 'Finish Date: '  FROM source_destination_change_log s, items i, users u , item_order_request o WHERE (state_source= 1 AND state_destination = 1)", connection);
-				adtr.Fill(dtbl);
 
-			}
-			catch (Exception err)
-			{
-				Console.WriteLine(err.Message);
-			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						adtr.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
-			return dtbl;
-		}
-
-		public DataTable setOrderRequestHistoryDataTable()
-        {
-			MySqlDataAdapter adtr = null;
-			MySqlConnection connection = null;
-			connection = getConnection();
-			connection.Open();
-			DataTable dtbl = new DataTable();
-			try
-			{
-				adtr = new MySqlDataAdapter("SELECT * FROM item_order_request WHERE state = 1", connection);
-				adtr.Fill(dtbl);
-
-			}
-			catch (Exception err)
-			{
-				Console.WriteLine(err.Message);
-			}
-			finally
-			{
-				if (connection != null)
-				{
-					try
-					{//bağlantıları kapat
-						connection.Close();
-						adtr.Dispose();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-				}
-			}
-			return dtbl;
-		}
+		
 		public List<orderUpdateItem> getItemsById(int itemID)
 		{
 			List<orderUpdateItem> items = new List<orderUpdateItem>();

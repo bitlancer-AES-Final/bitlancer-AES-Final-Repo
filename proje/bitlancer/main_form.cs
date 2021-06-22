@@ -47,22 +47,15 @@ namespace bitlancer
         public void setOrderRequestDataGrid()
         {
             DataTable dtbl = new DataTable();
-            dtbl = SingletonDB.GetInstance.setOrderRequestDataTable();
+            dtbl = SingletonDB.GetInstance.setDataTable("SELECT * FROM item_order_request WHERE state = 0");
             orderRequestDataGrid.DataSource = dtbl;
-
-        }
-        public void setRaporDataTableRefresh()
-        {
-            DataTable dtbl = new DataTable();
-            dtbl = SingletonDB.GetInstance.setRaporDataTable();
-            dgwRaporBilgileri.DataSource = dtbl;
 
         }
 
         public void setOrderRequestHistoryDataGrid()
         {
             DataTable dtbl = new DataTable();
-            dtbl = SingletonDB.GetInstance.setOrderRequestHistoryDataTable();
+            dtbl = SingletonDB.GetInstance.setDataTable("SELECT * FROM item_order_request WHERE state = 1");
             orderRequestHistoryDataGrid.DataSource = dtbl;
 
         }
@@ -82,7 +75,6 @@ namespace bitlancer
                 transferlerDatgrid.Columns[2].Visible = false;
                 setLastOrder();
                 setOrderRequestDataGrid();
-                setRaporDataTableRefresh();
                 setOrderRequestHistoryDataGrid();
                 kullancıAdLabel.Text = MyUser.fullName;
                 switch (MyUser.userType)
@@ -184,9 +176,10 @@ namespace bitlancer
 
         private void btnRaporOlustur_Click(object sender, EventArgs e)
         {
-            DataTable dtbl = SingletonDB.GetInstance.setRaporDataTable();
+            DataTable dtbl = SingletonDB.GetInstance.getLastOrderBetweenDate(userID,dateTimeBaslangic.Value,dateTimeBitis.Value);
             CreateReport(dtbl);
         }
+           
 
         public void CreateReport(DataTable data)
         {
@@ -212,6 +205,10 @@ namespace bitlancer
             }
         }
 
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
 
         private void userInfoButton_Click(object sender, EventArgs e)
         {

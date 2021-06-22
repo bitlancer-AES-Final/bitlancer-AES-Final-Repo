@@ -24,11 +24,19 @@ namespace bitlancer
         
         private void btnOnay_Click(object sender, EventArgs e)
         {
-            MySqlCommand command = new MySqlCommand();
-            command = SingletonDB.GetInstance.refOrderRequest(_item_id,_userID, txtDesiredPrice.Text, txtDesiredQuantity.Text);
-            txtDesiredPrice.Text = "";
-            txtDesiredQuantity.Text = "";
-            MessageBox.Show("İstek Onaylandı!");
+            try
+            {
+                MySqlCommand command = new MySqlCommand();
+                command = SingletonDB.GetInstance.refOrderRequest(_item_id, _userID, Convert.ToDouble(txtDesiredPrice.Text), Convert.ToInt32(txtDesiredQuantity.Text));
+                //command.ExecuteNonQuery();
+                txtDesiredPrice.Text = "";
+                txtDesiredQuantity.Text = "";
+                MessageBox.Show("İstek Onaylandı!");
+            }
+           catch(Exception err)
+            {
+                Console.WriteLine(err.Message);
+            }
         }
 
         private void orderRequest_Load(object sender, EventArgs e)
