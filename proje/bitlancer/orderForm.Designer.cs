@@ -75,7 +75,7 @@
             legend1.Name = "Legend1";
             this.chart.Legends.Add(legend1);
             this.chart.Location = new System.Drawing.Point(16, 287);
-            this.chart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chart.Margin = new System.Windows.Forms.Padding(4);
             this.chart.Name = "chart";
             this.chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
             series1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
@@ -126,7 +126,7 @@
             // 
             this.itemPriceLabel.AutoSize = true;
             this.itemPriceLabel.Font = new System.Drawing.Font("Arial Black", 19F, System.Drawing.FontStyle.Bold);
-            this.itemPriceLabel.Location = new System.Drawing.Point(431, 151);
+            this.itemPriceLabel.Location = new System.Drawing.Point(459, 151);
             this.itemPriceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.itemPriceLabel.Name = "itemPriceLabel";
             this.itemPriceLabel.Size = new System.Drawing.Size(126, 45);
@@ -138,7 +138,7 @@
             // 
             this.quantityTextBox.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.quantityTextBox.Location = new System.Drawing.Point(25, 111);
-            this.quantityTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.quantityTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.quantityTextBox.Name = "quantityTextBox";
             this.quantityTextBox.Size = new System.Drawing.Size(463, 42);
             this.quantityTextBox.TabIndex = 4;
@@ -149,7 +149,7 @@
             this.valTextBox.Enabled = false;
             this.valTextBox.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.valTextBox.Location = new System.Drawing.Point(551, 110);
-            this.valTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.valTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.valTextBox.Name = "valTextBox";
             this.valTextBox.Size = new System.Drawing.Size(505, 42);
             this.valTextBox.TabIndex = 6;
@@ -161,7 +161,7 @@
             this.buyButton.Font = new System.Drawing.Font("Bahnschrift", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.buyButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buyButton.Location = new System.Drawing.Point(550, 200);
-            this.buyButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buyButton.Margin = new System.Windows.Forms.Padding(4);
             this.buyButton.Name = "buyButton";
             this.buyButton.Size = new System.Drawing.Size(506, 75);
             this.buyButton.TabIndex = 7;
@@ -189,7 +189,7 @@
             this.transferlerDatgrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.transferlerDatgrid.GridColor = System.Drawing.Color.Plum;
             this.transferlerDatgrid.Location = new System.Drawing.Point(16, 693);
-            this.transferlerDatgrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.transferlerDatgrid.Margin = new System.Windows.Forms.Padding(4);
             this.transferlerDatgrid.MultiSelect = false;
             this.transferlerDatgrid.Name = "transferlerDatgrid";
             this.transferlerDatgrid.ReadOnly = true;
@@ -254,7 +254,7 @@
             this.btnIstek.Font = new System.Drawing.Font("Bahnschrift", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnIstek.ForeColor = System.Drawing.Color.White;
             this.btnIstek.Location = new System.Drawing.Point(25, 200);
-            this.btnIstek.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnIstek.Margin = new System.Windows.Forms.Padding(4);
             this.btnIstek.Name = "btnIstek";
             this.btnIstek.Size = new System.Drawing.Size(463, 75);
             this.btnIstek.TabIndex = 16;
@@ -267,7 +267,7 @@
             this.picBoxYuklenme.Enabled = false;
             this.picBoxYuklenme.Image = global::bitlancer.Properties.Resources.ezgif_2_6d0b072c3d3f;
             this.picBoxYuklenme.Location = new System.Drawing.Point(407, 11);
-            this.picBoxYuklenme.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picBoxYuklenme.Margin = new System.Windows.Forms.Padding(4);
             this.picBoxYuklenme.Name = "picBoxYuklenme";
             this.picBoxYuklenme.Size = new System.Drawing.Size(220, 71);
             this.picBoxYuklenme.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -279,7 +279,7 @@
             // 
             this.picBoxDegisiklik.Image = global::bitlancer.Properties.Resources.reverse_pngrepo_com;
             this.picBoxDegisiklik.Location = new System.Drawing.Point(497, 111);
-            this.picBoxDegisiklik.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picBoxDegisiklik.Margin = new System.Windows.Forms.Padding(4);
             this.picBoxDegisiklik.Name = "picBoxDegisiklik";
             this.picBoxDegisiklik.Size = new System.Drawing.Size(45, 42);
             this.picBoxDegisiklik.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -309,7 +309,7 @@
             this.Controls.Add(this.chart);
             this.Controls.Add(this.lblUrunAd);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "orderForm";
             this.Load += new System.EventHandler(this.orderForm_Load);

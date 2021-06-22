@@ -50,7 +50,7 @@
             this.pnlArkaPlan.Location = new System.Drawing.Point(0, 0);
             this.pnlArkaPlan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlArkaPlan.Name = "pnlArkaPlan";
-            this.pnlArkaPlan.Size = new System.Drawing.Size(918, 571);
+            this.pnlArkaPlan.Size = new System.Drawing.Size(895, 571);
             this.pnlArkaPlan.TabIndex = 0;
             // 
             // lblKullaniciGirisPaneli
@@ -150,13 +150,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(918, 571);
+            this.ClientSize = new System.Drawing.Size(895, 571);
             this.Controls.Add(this.pnlArkaPlan);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FrmGiris";
-            this.Load += new System.EventHandler(this.FrmGiris_Load);
             this.pnlArkaPlan.ResumeLayout(false);
             this.pnlArkaPlan.PerformLayout();
             this.pnlGiris.ResumeLayout(false);

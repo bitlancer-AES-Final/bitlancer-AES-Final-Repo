@@ -18,11 +18,6 @@ namespace bitlancer
         }
 
 
-        private void FrmGiris_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnGirisYap_Click_1(object sender, EventArgs e)
         {
             if (username_textbox.Text != "" && userpassword_textbox.Text != "")

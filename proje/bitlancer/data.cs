@@ -631,7 +631,6 @@ namespace bitlancer
         {
 			
 			bool state = true;
-			
 			MySqlCommand command3 = null;
 			MySqlCommand commandControlPriceQuantity = null;
 			MySqlConnection connection = null;
@@ -644,7 +643,6 @@ namespace bitlancer
 			int sourceTotalMoney = 0;
 			try
            {
-				
 				connection = getConnection();
 				connection.Open();
 				if(source== true) //source'un itemleri/parasi uzerinde degisiklik yapilacaksa gir.
@@ -654,7 +652,6 @@ namespace bitlancer
 						sourceTotalMoney = getId("SELECT quantity FROM item_user_infos WHERE user_id=" + source_user_id + " AND item_id= 4");
 						commandControlPriceQuantity = new MySqlCommand("SELECT o.order_request_unit_price, o.order_request_quantity, o.request_id FROM item_user_infos u, item_order_request o, items i WHERE o.state = 0 AND u.selling = 1 AND o.item_id = u.item_id AND o.order_request_unit_price >= u.unit_price AND o.order_request_quantity <= u.quantity GROUP BY u.unit_price", connection);
 						readCommandControlPQ = commandControlPriceQuantity.ExecuteReader();
-
 						bool firstPriceSelect = true;
 						while (readCommandControlPQ.Read() && firstPriceSelect)
 						{
@@ -667,14 +664,12 @@ namespace bitlancer
 						connection.Close();
 						connection2 = getConnection();
 						connection2.Open();
-
 						if (sourceTotalMoney < moneyNeeded)
 						{
 							state = false;
 						}
 						else
 						{
-							
 							try
 							{
 								int sourceGetSourceTL = getId("select quantity from item_user_infos where item_id=4 and user_id="+source_user_id);
@@ -699,9 +694,6 @@ namespace bitlancer
                     }
 					
                 }
-					
-					
-				
 				else //destination'in itemleri/parasi uzerinde degisiklik yapilacaksa gir.
 				{
                     try 
@@ -718,7 +710,6 @@ namespace bitlancer
 							moneyNeeded = _quantity * _price;						// gereken total para 
 							firstPriceSelect = false;
 						}
-
 						connection.Close();
 						connection2 = getConnection();
 						connection2.Open();
@@ -742,10 +733,6 @@ namespace bitlancer
                     {
 						Console.WriteLine(err.Message);
                     }
-					
-					
-					
-				
 				}
 
 			}
@@ -769,13 +756,11 @@ namespace bitlancer
 					}
 				}
 			}
-
 			return state;
         }
 
 		/*public bool updateAfterOrderRequestBackUp(int source_user_id, int destination_user_id, int item_id, int quantity, double unitPrice, bool stateType, int request_id) //bool source kismi guncelleme isinin kaynakta mi hedefte mi yapildigini gosteriyor.
 		{
-
 			bool state = true;
 			double _price=0;
 			int _quantity=0;
@@ -793,7 +778,6 @@ namespace bitlancer
 				{
 					try
                     {
-						
 						commandControlPriceQuantity = new MySqlCommand("SELECT o.order_request_unit_price, o.order_request_quantity, o.request_id FROM item_user_infos u, item_order_request o, items i WHERE o.state = 0 AND u.selling = 1 AND o.item_id = u.item_id AND o.order_request_unit_price >= u.unit_price AND o.order_request_quantity <= u.quantity GROUP BY u.unit_price", connection);
 						readCommandControlPQ = commandControlPriceQuantity.ExecuteReader();
 						bool firstPriceSelect = true;
@@ -883,6 +867,7 @@ namespace bitlancer
 			return state;
 		}
 		*/
+
 		public bool updateOrderToSell(int sourceID, int itemID, int quantity, int All0, int All1, double unitPrice)
 		{
 			bool state = false;
@@ -940,6 +925,7 @@ namespace bitlancer
 			}
 			return state;
 		}
+
 		public void manageOrder(int userID, int itemID, int quantity, bitlancer.orderTypes orderType, double unitPriceSell = 0)
 		{
 			if (orderType == bitlancer.orderTypes.buy)
@@ -1010,6 +996,7 @@ namespace bitlancer
 				updateOrderToSell(userID, itemID, quantity, myAllQuantity, myAllQuantity2, unitPriceSell);
 			}
 		}
+
 
 		public bool manageOrderRequest(int source_user_id,int destination_user_id, int item_id, int order_request_quantity, double order_request_unit_price, int request_id )
         {
