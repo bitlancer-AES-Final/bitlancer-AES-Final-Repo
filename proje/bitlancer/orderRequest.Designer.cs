@@ -42,9 +42,10 @@ namespace bitlancer
             // 
             this.w.AutoSize = true;
             this.w.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.w.Location = new System.Drawing.Point(28, 31);
+            this.w.Location = new System.Drawing.Point(37, 38);
+            this.w.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.w.Name = "w";
-            this.w.Size = new System.Drawing.Size(131, 21);
+            this.w.Size = new System.Drawing.Size(170, 27);
             this.w.TabIndex = 0;
             this.w.Text = "İstediğiniz Ürün:";
             // 
@@ -52,62 +53,70 @@ namespace bitlancer
             // 
             this.lblDesiredQuantity.AutoSize = true;
             this.lblDesiredQuantity.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblDesiredQuantity.Location = new System.Drawing.Point(28, 68);
+            this.lblDesiredQuantity.Location = new System.Drawing.Point(37, 84);
+            this.lblDesiredQuantity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDesiredQuantity.Name = "lblDesiredQuantity";
-            this.lblDesiredQuantity.Size = new System.Drawing.Size(142, 21);
+            this.lblDesiredQuantity.Size = new System.Drawing.Size(187, 27);
             this.lblDesiredQuantity.TabIndex = 2;
             this.lblDesiredQuantity.Text = "İstediğiniz Miktar:";
             // 
             // txtDesiredQuantity
             // 
             this.txtDesiredQuantity.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtDesiredQuantity.Location = new System.Drawing.Point(187, 67);
+            this.txtDesiredQuantity.Location = new System.Drawing.Point(232, 87);
+            this.txtDesiredQuantity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDesiredQuantity.Name = "txtDesiredQuantity";
-            this.txtDesiredQuantity.Size = new System.Drawing.Size(121, 22);
+            this.txtDesiredQuantity.Size = new System.Drawing.Size(160, 26);
             this.txtDesiredQuantity.TabIndex = 3;
             // 
             // lblDesiredPrice
             // 
             this.lblDesiredPrice.AutoSize = true;
             this.lblDesiredPrice.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblDesiredPrice.Location = new System.Drawing.Point(28, 107);
+            this.lblDesiredPrice.Location = new System.Drawing.Point(37, 132);
+            this.lblDesiredPrice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDesiredPrice.Name = "lblDesiredPrice";
-            this.lblDesiredPrice.Size = new System.Drawing.Size(117, 21);
+            this.lblDesiredPrice.Size = new System.Drawing.Size(155, 27);
             this.lblDesiredPrice.TabIndex = 2;
             this.lblDesiredPrice.Text = "İstenilen Fiyat:";
             // 
             // txtDesiredPrice
             // 
             this.txtDesiredPrice.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtDesiredPrice.Location = new System.Drawing.Point(187, 106);
+            this.txtDesiredPrice.Location = new System.Drawing.Point(232, 132);
+            this.txtDesiredPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDesiredPrice.Name = "txtDesiredPrice";
-            this.txtDesiredPrice.Size = new System.Drawing.Size(121, 22);
+            this.txtDesiredPrice.Size = new System.Drawing.Size(160, 26);
             this.txtDesiredPrice.TabIndex = 3;
             // 
             // btnOnay
             // 
-            this.btnOnay.Location = new System.Drawing.Point(338, 29);
+            this.btnOnay.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOnay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnOnay.Location = new System.Drawing.Point(451, 38);
+            this.btnOnay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOnay.Name = "btnOnay";
-            this.btnOnay.Size = new System.Drawing.Size(75, 99);
+            this.btnOnay.Size = new System.Drawing.Size(122, 122);
             this.btnOnay.TabIndex = 4;
             this.btnOnay.Text = "Onayla";
-            this.btnOnay.UseVisualStyleBackColor = true;
+            this.btnOnay.UseVisualStyleBackColor = false;
             this.btnOnay.Click += new System.EventHandler(this.btnOnay_Click);
             // 
             // lblDesiredItem
             // 
             this.lblDesiredItem.AutoSize = true;
             this.lblDesiredItem.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblDesiredItem.Location = new System.Drawing.Point(183, 29);
+            this.lblDesiredItem.Location = new System.Drawing.Point(244, 36);
+            this.lblDesiredItem.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDesiredItem.Name = "lblDesiredItem";
-            this.lblDesiredItem.Size = new System.Drawing.Size(0, 21);
+            this.lblDesiredItem.Size = new System.Drawing.Size(0, 27);
             this.lblDesiredItem.TabIndex = 0;
             // 
             // orderRequest
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(421, 162);
+            this.ClientSize = new System.Drawing.Size(586, 223);
             this.Controls.Add(this.btnOnay);
             this.Controls.Add(this.txtDesiredPrice);
             this.Controls.Add(this.lblDesiredPrice);
@@ -115,8 +124,9 @@ namespace bitlancer
             this.Controls.Add(this.lblDesiredQuantity);
             this.Controls.Add(this.lblDesiredItem);
             this.Controls.Add(this.w);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "orderRequest";
-            this.Text = "orderRequest";
             this.Load += new System.EventHandler(this.orderRequest_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

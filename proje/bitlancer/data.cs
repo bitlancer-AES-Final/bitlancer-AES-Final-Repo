@@ -1035,7 +1035,7 @@ namespace bitlancer
 				if (connection != null)
 				{
 					try
-					{//bağlantıları kapat
+					{//bağlantıyı kapat
 						connection.Close();
 						if(command!= null)
                         {
