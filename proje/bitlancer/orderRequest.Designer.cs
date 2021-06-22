@@ -64,7 +64,7 @@ namespace bitlancer
             // 
             this.txtDesiredQuantity.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtDesiredQuantity.Location = new System.Drawing.Point(232, 87);
-            this.txtDesiredQuantity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDesiredQuantity.Margin = new System.Windows.Forms.Padding(4);
             this.txtDesiredQuantity.Name = "txtDesiredQuantity";
             this.txtDesiredQuantity.Size = new System.Drawing.Size(160, 26);
             this.txtDesiredQuantity.TabIndex = 3;
@@ -84,17 +84,17 @@ namespace bitlancer
             // 
             this.txtDesiredPrice.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtDesiredPrice.Location = new System.Drawing.Point(232, 132);
-            this.txtDesiredPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDesiredPrice.Margin = new System.Windows.Forms.Padding(4);
             this.txtDesiredPrice.Name = "txtDesiredPrice";
             this.txtDesiredPrice.Size = new System.Drawing.Size(160, 26);
             this.txtDesiredPrice.TabIndex = 3;
             // 
             // btnOnay
             // 
-            this.btnOnay.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOnay.BackColor = System.Drawing.Color.SkyBlue;
             this.btnOnay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnOnay.Location = new System.Drawing.Point(451, 38);
-            this.btnOnay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOnay.Margin = new System.Windows.Forms.Padding(4);
             this.btnOnay.Name = "btnOnay";
             this.btnOnay.Size = new System.Drawing.Size(122, 122);
             this.btnOnay.TabIndex = 4;
@@ -116,6 +116,7 @@ namespace bitlancer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MistyRose;
             this.ClientSize = new System.Drawing.Size(586, 223);
             this.Controls.Add(this.btnOnay);
             this.Controls.Add(this.txtDesiredPrice);
@@ -125,7 +126,7 @@ namespace bitlancer
             this.Controls.Add(this.lblDesiredItem);
             this.Controls.Add(this.w);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "orderRequest";
             this.Load += new System.EventHandler(this.orderRequest_Load);
             this.ResumeLayout(false);

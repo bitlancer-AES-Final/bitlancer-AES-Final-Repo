@@ -1052,7 +1052,7 @@ namespace bitlancer
 			return siraAtlama;
 		}
 
-
+		//database'e istek kaydedilir
 		public MySqlCommand refOrderRequest(int _item_id, int _userID, string DesiredPrice, string DesiredQuantity)
         {
 			MySqlConnection connection = null;
@@ -1085,7 +1085,7 @@ namespace bitlancer
 			}
 			return command;
 		}
-
+		//istek listelerin yenilenmesini sağlar
 		public void orderRequestCheck()
         {
 			MySqlCommand command = null;
@@ -1125,7 +1125,7 @@ namespace bitlancer
 			}
 			
 		}
-
+		//istek listesi tablosunu gunceller
 		public DataTable setOrderRequestDataTable()
         {
 			MySqlDataAdapter adtr = null;

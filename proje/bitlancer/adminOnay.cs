@@ -69,7 +69,7 @@ namespace bitlancer
 
             veriReset();
         }
-        public double getCurrency(string name) //anlık olarak siteden döviz kurlarını çeken fonksiyon
+        public double getCurrency(string name) //Anlık olarak siteden döviz kurlarını çeken fonksiyon
         {
             XmlDocument xDoc = new XmlDocument();
             string instantCurrency = "http://www.tcmb.gov.tr/kurlar/today.xml";
