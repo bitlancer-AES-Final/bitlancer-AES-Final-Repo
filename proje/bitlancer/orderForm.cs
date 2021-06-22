@@ -78,9 +78,9 @@ namespace bitlancer
         {
             lblUrunAd.Text = myItem.itemName;
             quantity.Text = "Maksimum Miktar: " + myItem.quantity;
-            itemPriceLabel.Text = myItem.unitPrice + " ₺ : ";
+            itemPriceLabel.Text = myItem.unitPrice + " ₺ : "; //burasi degiscek.
             transferlerDatgrid.DataSource = lastOrdersData;
-            if (quantityTextBox.Text != ""&&islem==bitlancer.orderTypes.buy)
+            if (quantityTextBox.Text != "" && islem == bitlancer.orderTypes.buy)
             {
                 try
                 {
@@ -93,7 +93,7 @@ namespace bitlancer
             }
             if (x >= 250)
             {
-                chart.Series["line"].Points.RemoveAt(0);
+                chart.Series["line"].Points.RemoveAt(0);  //burayı anlamadim. x'in olayini ayrica chart muhabbetini de.
             }
             else
             {
@@ -115,6 +115,7 @@ namespace bitlancer
                 myItem = SingletonDB.GetInstance.getItem(itemID);
                 myItem.quantity = SingletonDB.GetInstance.getId("select quantity from item_user_infos where selling=0 and (item_id=" + itemID + " and user_id=" + userID + ")");
                 myItem.unitPrice = SingletonDB.GetInstance.getDouble("select min(unit_price) from item_user_infos where selling=1 and item_id="+itemID);
+
             }
             else
             {
@@ -123,7 +124,7 @@ namespace bitlancer
             lastOrdersData = SingletonDB.GetInstance.getLastOrders(userID,itemID);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void picBoxDegisiklik_Click(object sender, EventArgs e)
         {
             
             if (islem == bitlancer.orderTypes.sell)
@@ -164,8 +165,9 @@ namespace bitlancer
                 picBoxDegisiklik.Enabled = false;
                 picBoxYuklenme.Visible = true;
                 picBoxYuklenme.Enabled = true;
-                label3.Visible = true;
+                lblMesaj.Visible = true;
             }
+
             else
             {
                 MessageBox.Show("Maksimum Miktardan Fazla Alamazsınız!", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -186,7 +188,13 @@ namespace bitlancer
             picBoxDegisiklik.Enabled = true;
             picBoxYuklenme.Visible = false;
             picBoxYuklenme.Enabled = false;
-            label3.Visible = false;
+            lblMesaj.Visible = false;
+        }
+
+        private void btnIstek_Click(object sender, EventArgs e)
+        {
+            orderRequest orderRequest1 = new orderRequest(userID, itemID);
+            orderRequest1.ShowDialog();
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

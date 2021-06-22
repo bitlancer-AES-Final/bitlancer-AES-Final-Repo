@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,11 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
 namespace bitlancer
 {
     public partial class main_form : Form
     {
-        DataTable itemData,lastOrdersData,userTransfers;
+        DataTable itemData, lastOrdersData, userTransfers;
         User MyUser;
         int userID;
         public main_form(int userID)
@@ -41,6 +44,28 @@ namespace bitlancer
                 }
             }
         }
+        public void setOrderRequestDataGrid()
+        {
+            DataTable dtbl = new DataTable();
+            dtbl = SingletonDB.GetInstance.setOrderRequestDataTable();
+            orderRequestDataGrid.DataSource = dtbl;
+
+        }
+        public void setRaporDataTableRefresh()
+        {
+            DataTable dtbl = new DataTable();
+            dtbl = SingletonDB.GetInstance.setRaporDataTable();
+            dgwRaporBilgileri.DataSource = dtbl;
+
+        }
+
+        public void setOrderRequestHistoryDataGrid()
+        {
+            DataTable dtbl = new DataTable();
+            dtbl = SingletonDB.GetInstance.setOrderRequestHistoryDataTable();
+            orderRequestHistoryDataGrid.DataSource = dtbl;
+
+        }
         public void setUserToUI()
         {
             try
@@ -50,12 +75,15 @@ namespace bitlancer
                 urunlerDatagrid.DataSource = MyUser.items;
                 urunlerDatagrid.Columns[1].Visible = false;
                 urunlerDatagrid.Columns[2].HeaderText = "Para Birimi:";
-                urunlerDatagrid.Columns[3].Visible=false;
+                urunlerDatagrid.Columns[3].Visible = false;
                 urunlerDatagrid.Columns[4].HeaderText = "Miktar:";
                 urunlerDatagrid.Columns[5].HeaderText = "Satışta:";
                 transferlerDatgrid.DataSource = userTransfers;
                 transferlerDatgrid.Columns[2].Visible = false;
                 setLastOrder();
+                setOrderRequestDataGrid();
+                setRaporDataTableRefresh();
+                setOrderRequestHistoryDataGrid();
                 kullancıAdLabel.Text = MyUser.fullName;
                 switch (MyUser.userType)
                 {
@@ -74,18 +102,18 @@ namespace bitlancer
                 }
                 bakiyeLabel.Text = MyUser.money + " ₺";
                 List<chartItemValue> chartItemList = new List<chartItemValue>();
-                if (MyUser.items!=null)
+                if (MyUser.items != null)
                 {
                     foreach (item item in MyUser.items)
                     {
-                        chartItemList.Add(new chartItemValue((item.selling ? "Sş. " : "") + " " + item.itemName , item.quantity));
+                        chartItemList.Add(new chartItemValue((item.selling ? "Sş. " : "") + " " + item.itemName, item.quantity));
                     }
-                   graphic.DataSource = chartItemList;
+                    graphic.DataSource = chartItemList;
                 }
                 graphic.Series["Para"].XValueMember = "itemName";
                 graphic.Series["Para"].YValueMembers = "val";
                 graphic.Series["Para"].IsValueShownAsLabel = true;
-                graphic.Titles["miktar"].Text = "CÜZDAN "+bakiyeLabel.Text;
+                graphic.Titles["miktar"].Text = "CÜZDAN " + bakiyeLabel.Text;
                 graphic.DataBind();
                 chartItemList.Clear();
             }
@@ -94,10 +122,12 @@ namespace bitlancer
                 Console.WriteLine(e.Message);
             }
         }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (!backgroundWorker1.IsBusy)
             {
+
                 backgroundWorker1.RunWorkerAsync();
             }
         }
@@ -107,6 +137,8 @@ namespace bitlancer
             MyUser = SingletonDB.GetInstance.getUser(userID);
             userTransfers = SingletonDB.GetInstance.getItemTransfers(MyUser.id);
             lastOrdersData = SingletonDB.GetInstance.getLastOrders(userID);
+            SingletonDB.GetInstance.orderRequestCheck();
+
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -121,13 +153,13 @@ namespace bitlancer
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
                 orderForm order;
-                if (e.ColumnIndex==0)
+                if (e.ColumnIndex == 0)
                 {
-                    order = new orderForm(bitlancer.orderTypes.buy,userID,Convert.ToInt32(mainItemsDataGrid[5, e.RowIndex].Value));
+                    order = new orderForm(bitlancer.orderTypes.buy, userID, Convert.ToInt32(mainItemsDataGrid[5, e.RowIndex].Value));
                 }
                 else
                 {
-                    order = new orderForm(bitlancer.orderTypes.sell,userID, Convert.ToInt32(mainItemsDataGrid[5, e.RowIndex].Value));
+                    order = new orderForm(bitlancer.orderTypes.sell, userID, Convert.ToInt32(mainItemsDataGrid[5, e.RowIndex].Value));
                 }
                 order.ShowDialog();
             }
@@ -137,9 +169,9 @@ namespace bitlancer
         {
             var senderGrid = (DataGridView)sender;
 
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && Convert.ToInt32(urunlerDatagrid[1, e.RowIndex].Value)!=4)
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && Convert.ToInt32(urunlerDatagrid[1, e.RowIndex].Value) != 4)
             {
-                orderForm order = new orderForm(bitlancer.orderTypes.sell, userID, Convert.ToInt32(urunlerDatagrid[1, e.RowIndex].Value),true);
+                orderForm order = new orderForm(bitlancer.orderTypes.sell, userID, Convert.ToInt32(urunlerDatagrid[1, e.RowIndex].Value), true);
                 order.ShowDialog();
             }
         }
@@ -149,6 +181,37 @@ namespace bitlancer
             Transfer transfer = new Transfer(userID);
             transfer.ShowDialog();
         }
+
+        private void btnRaporOlustur_Click(object sender, EventArgs e)
+        {
+            DataTable dtbl = SingletonDB.GetInstance.setRaporDataTable();
+            CreateReport(dtbl);
+        }
+
+        public void CreateReport(DataTable data)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Excel dosyası| .xlsx" })
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        using (XLWorkbook wb = new XLWorkbook())
+                        {
+                            wb.Worksheets.Add(data, "Rapor " + DateTime.Now.ToShortDateString());
+                            wb.SaveAs(saveFileDialog.FileName);
+                        }
+                        MessageBox.Show("rapor oluştu..", "Mesaj", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("hata...\n" + e.Message);
+                        throw;
+                    }
+                }
+            }
+        }
+
 
         private void userInfoButton_Click(object sender, EventArgs e)
         {

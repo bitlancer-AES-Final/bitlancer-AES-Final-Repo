@@ -18,5 +18,6 @@ namespace bitlancer
             buy,
             sell
         }
+
     }
 }

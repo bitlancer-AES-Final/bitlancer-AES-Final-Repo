@@ -16,12 +16,19 @@ namespace bitlancer
         {
             InitializeComponent();
         }
-        private void btnGirisYap_Click(object sender, EventArgs e)
+
+
+        private void FrmGiris_Load(object sender, EventArgs e)
         {
-            if (username_textbox.Text!="" && userpassword_textbox.Text!="")
+
+        }
+
+        private void btnGirisYap_Click_1(object sender, EventArgs e)
+        {
+            if (username_textbox.Text != "" && userpassword_textbox.Text != "")
             {
                 int currentUser = SingletonDB.GetInstance.loginCheck(username_textbox.Text, userpassword_textbox.Text);
-                if (currentUser!=0)
+                if (currentUser != 0)
                 {
                     main_form main = new main_form(currentUser);
                     this.Hide();
@@ -38,16 +45,10 @@ namespace bitlancer
             }
         }
 
-
-        private void linkLabelKayitOl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabelKayitOl_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmKullaniciKayit fr = new FrmKullaniciKayit();
             fr.ShowDialog();
-        }
-
-        private void FrmGiris_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
